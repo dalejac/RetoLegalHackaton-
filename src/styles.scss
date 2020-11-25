@@ -26,7 +26,7 @@ a {
 /* You can add global styles to this file, and also import other style files */
 .create-contract-form {
   &-label {
-    font-family: Poppins;
+    font-family: 'bold';
     font-style: normal;
     font-weight: bold;
     font-size: 26px;
@@ -63,7 +63,7 @@ a {
   fieldset {
     border: 0;
     legend {
-      font-family: Poppins;
+      font-family: 'bold';
       font-style: normal;
       font-weight: bold;
       font-size: 30px;
@@ -73,6 +73,17 @@ a {
     &[role=radiogroup] {
       display: flex;
       align-items: center;
+    }
+  }
+
+  dynamic-basic-radio-group {
+    span{
+      font-family: 'regular';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 26px;
+      line-height: 39px;
+      color: #406B2B;
     }
   }
 }
