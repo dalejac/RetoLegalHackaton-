@@ -7,18 +7,57 @@
 main{
     width: 100%;
     height: 100vh;
-    background-color:#9BB849; 
+    background-color: #9BB849; 
     justify-content: center;
     display: flex;
 }
 
+.container{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
 img{
-    margin:50px;
-    width: 455px;
+    margin: 70px 10px 50px 50px;
+    width: 400px;
+}
+
+label{
+    font-family: 'bold', sans-serif;
+    margin-top: 20px;
 }
 
 .login-input{
     display: flex;
     flex-flow: column;
+    align-items: center;
+    color: #ffffff;
+    text-align: center;
+}
 
+input {
+    margin-top: 20px;
+    width: 450px;
+    height: 45px;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    background-color: #9BB849;
+}
+
+::placeholder {
+    text-align: center;
+    font-family: 'regular';
+    color: white;
+}
+
+button {
+    font-family: 'bold', sans-serif;
+    font-weight: 38px;
+    margin-top: 50px;
+    width: 250px;
+    height: 50px;
+    border-radius: 15px;
+    color: #ffffff;
+    background-color:#FF7C1A;
 }
