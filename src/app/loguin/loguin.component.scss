@@ -20,5 +20,17 @@ img{
 .loguin-input{
     display: flex;
     flex-flow: column;
+    color: #ffffff;
+}
 
+input {
+    border-radius: 30px;
+}
+
+button {
+    width: 400px;
+    height: 100px;
+    border-radius: 30px;
+    color: #ffffff;
+    background-color:#FF7C1A;
 }
