@@ -1,0 +1,46 @@
+.nav-toolbar {
+  width: 100%;
+  height: 75px;
+  font-family: 'bold', sans-serif;
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 0px 50px;
+  background: #9BB849;
+
+  a {
+    color: #ffffff;
+    font-size: 20px;
+    margin: 0px 80px;
+    font-weight: bold;
+  }
+}
+
+.logo {
+  width: 155px;
+  height: 125px;
+  left: 85px;
+}
+
+
+.nav-options {
+  display: flex;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+}
+
+.text-user {
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.profile-ico {
+  width: 50px;
+  height: 50px;
+}
+
+

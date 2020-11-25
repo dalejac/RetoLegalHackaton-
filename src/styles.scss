@@ -1,3 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+*{
+  box-sizing:border-box;
+  margin: 0px;
+  padding: 0PX;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
 @font-face{
     font-family: 'regular';
     src: url('/assets/fonts/regular.otf');
