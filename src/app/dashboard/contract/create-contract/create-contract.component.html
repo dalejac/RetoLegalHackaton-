@@ -1,1 +1,8 @@
-<p>create-contract works!</p>
+<p class="create-contract-message">Genera un nuevo contrato según solicitud del área usuaria</p>
+
+<form class="create-contract-form" [formGroup]="formGroup">
+
+    <dynamic-basic-form [group]="formGroup" [model]="formModel" [layout]="formLayout"></dynamic-basic-form>
+
+    <button (click)="save()">Guardar</button>
+</form>
