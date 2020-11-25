@@ -1,8 +1,11 @@
-.create-contract-message {
-  font-family: 'regular';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
-  line-height: 45px;
-  color: #406B2B;
+.create-contract {
+  margin: 90px;
+  &-message {
+    font-family: 'regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 45px;
+    color: #406B2B;
+  }
 }
