@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "reto-porvenir"
+    }
+  },
+  "defaultProject": "reto-porvenir",
+  "cli": {
+    "analytics": false
+  }
 }
