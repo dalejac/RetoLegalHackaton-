@@ -601,7 +601,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         },
         fieldGroup: [
             {
-                key: 'certificatedOfExistencePorvenir',
+                key: 'certificatedOfExistence',
                 type: 'file',
                 className: 'form-section-row',
                 templateOptions: {
@@ -636,3 +636,5 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         ]
     }
 ];
+
+export const SupplierMessage = 'Genera un nuevo contrato según solicitud del área usuaria';

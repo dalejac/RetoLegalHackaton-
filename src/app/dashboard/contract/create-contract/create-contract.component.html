@@ -1,12 +1,12 @@
 <div class="create-contract">
-    <p class="create-contract-message">Genera un nuevo contrato según solicitud del área usuaria</p>
+    <p class="create-contract-message">{{message}}</p>
 
     <form class="create-contract-form" [formGroup]="form">
 
         <formly-form [form]="form" [fields]="fields" [options]="options" [model]="model"></formly-form>
 
         <div class="create-contract-buttons">
-            <button class="create-contract-button__request" (click)="requireInfo()">Solicitar información complementaria al área interesada del proceso</button>
+            <button *ngIf="currentUserRole === userRole.Supplier" class="create-contract-button__request" (click)="requireInfo()">Solicitar información complementaria al área interesada del proceso</button>
             <button class="create-contract-button__save" (click)="save()">Guardar contrato</button>
         </div>
 
