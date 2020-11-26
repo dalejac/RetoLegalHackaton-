@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as htmlDocx from 'html-docx-js/dist/html-docx'; 
-import { saveAs } from 'file-saver';
+import {ContractGeneratorService} from '../../../core/services/files/contract-generator.service';
 
 @Component({
   selector: 'app-contract-states',
@@ -9,15 +8,12 @@ import { saveAs } from 'file-saver';
 })
 export class ContractStatesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private contractGeneratorService: ContractGeneratorService) { }
 
   ngOnInit(): void {
   }
 
   public download(): void {
-    let htmlDocument = '<!DOCTYPE html><html><head><meta charset="utf-8"><title></title>';
-    htmlDocument = htmlDocument + '</head><body>' + 'CONTRATO' + '</body></html>';
-    const converted = htmlDocx.asBlob(htmlDocument);
-    saveAs(converted, 'TITULO DE CONTRATO' + '.docx');
+    this.contractGeneratorService.downloadContract({});
   }
 }
