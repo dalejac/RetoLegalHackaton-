@@ -26,6 +26,5 @@ export class FirestoreService {
         const _id = a.payload.doc.id;
         return { _id, ...data };
       })));
-
   }
 }
