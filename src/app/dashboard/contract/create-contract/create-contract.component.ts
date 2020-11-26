@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
-import {createContractFields} from './contract-form-builder';
+import {FormlyFormOptions} from '@ngx-formly/core';
+import {AuthService} from '../../../core/services/auth/auth.service';
+import {UserRole} from '../../../core/types/user-type.type';
+import {SupplierContractFormBuilder} from './supplier-contract-form-builder';
+import {UserContractFormBuilder} from './user-contract-form-builder';
 
 @Component({
   selector: 'app-create-contract',
@@ -12,14 +15,14 @@ export class CreateContractComponent implements OnInit {
 
   form = new FormGroup({});
   model: any = {};
-  fields = createContractFields;
+  fields = this.authService.currentUserRole() === UserRole.Supplier ? SupplierContractFormBuilder : UserContractFormBuilder;
   options: FormlyFormOptions = {
     formState: {
       awesomeIsForced: false,
     },
   };
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
   }
