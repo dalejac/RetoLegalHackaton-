@@ -1,11 +1,17 @@
 <div class="create-contract">
     <p class="create-contract-message">Genera un nuevo contrato según solicitud del área usuaria</p>
 
-    <form class="create-contract-form" [formGroup]="formGroup">
+    <form class="create-contract-form" [formGroup]="form">
 
-        <dynamic-basic-form [group]="formGroup" [model]="formModel" [layout]="formLayout"></dynamic-basic-form>
+        <formly-form [form]="form" [fields]="fields" [options]="options" [model]="model"></formly-form>
 
-        <button (click)="save()">Guardar</button>
+        <div class="create-contract-buttons">
+            <button class="create-contract-button__request" (click)="requireInfo()">Solicitar información complementaria al área interesada del proceso</button>
+            <button class="create-contract-button__save" (click)="save()">Guardar contrato</button>
+        </div>
+
     </form>
+
+    {{ model | json}}
 
 </div>
