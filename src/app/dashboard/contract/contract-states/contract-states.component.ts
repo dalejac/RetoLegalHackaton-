@@ -11,5 +11,4 @@ export class ContractStatesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
