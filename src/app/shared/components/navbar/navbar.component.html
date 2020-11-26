@@ -10,8 +10,10 @@
   </ul>
   
   <div class="nav-user">
-    <h4 class="text-user">Area Abastecimiento</h4>
-    <img src="assets/images/profile-ico.png" class="profile-ico" alt="profile icon" />
+    <h4 class="text-user">{{ userRoleLabel }}</h4>
+    <button class="logout-button" (click)="logout()">
+      <img src="assets/images/profile-ico.png" class="profile-ico" alt="profile icon" />
+    </button>
   </div>
 
 </nav>
