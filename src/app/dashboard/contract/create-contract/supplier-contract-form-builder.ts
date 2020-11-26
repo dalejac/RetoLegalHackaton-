@@ -1,6 +1,6 @@
 import {FormlyFieldConfig} from '@ngx-formly/core';
 
-export const createContractFields: FormlyFieldConfig[] = [
+export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
     {
         key: 'generalInfoSection',
         wrappers: ['form-field'],
