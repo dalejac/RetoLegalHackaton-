@@ -34,7 +34,9 @@ a {
         align-items: center;
         label,
         formly-field-select,
-        formly-field-input {
+        formly-field-input,
+        formly-field-radio,
+        formly-field-file {
           margin-top: 30px;
           margin-bottom: 30px;
           flex: 1;
@@ -56,7 +58,7 @@ a {
           box-sizing: border-box;
           border-radius: 10px;
           width: 549px;
-          height: 57px;
+          min-height: 57px;
           margin-left: 15px;
           font-family: 'regular';
           font-style: normal;
@@ -66,33 +68,13 @@ a {
           color: #406B2B;
           padding: 10px;
         }
+        formly-field-radio {
+          & > div {
+            display: flex;
+          }
+        }
       }
     }
 
   }
 }
-
-///* You can add global styles to this file, and also import other style files */
-//.create-contract-form {
-//  dynamic-basic-radio-group {
-//    span{
-//      font-family: 'regular';
-//      font-style: normal;
-//      font-weight: normal;
-//      font-size: 26px;
-//      line-height: 39px;
-//      color: #406B2B;
-//    }
-//  }
-//}
-//
-
-//    legend {
-//      font-family: 'bold';
-//      font-style: normal;
-//      font-weight: bold;
-//      font-size: 30px;
-//      line-height: 45px;
-//      color: #FF7C1A;
-//    }
-

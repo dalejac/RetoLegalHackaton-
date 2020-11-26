@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DatePickerComponent} from './shared/components/formly/date-picker/date-picker.component';
+import {LabelWrapper} from './shared/components/formly/date-picker/wrappers/label-wrapper.component';
+import {FieldsetWrapper} from './shared/components/formly/date-picker/wrappers/filedset-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -14,9 +18,6 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    FormlyModule.forRoot({ extras: { lazyRender: true } }),
-    FormlyBootstrapModule
   ],
   providers: [],
   bootstrap: [AppComponent]

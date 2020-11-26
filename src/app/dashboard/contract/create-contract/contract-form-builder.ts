@@ -16,7 +16,6 @@ export const createContractFields: FormlyFieldConfig[] = [
                 templateOptions: {
                     label: 'Área interna interesada en el proceso',
                     required: true,
-                    className: 'option-abc',
                     options: [
                         {
                             label: 'Gerencia de Servicios Tecnológicos',
@@ -238,6 +237,401 @@ export const createContractFields: FormlyFieldConfig[] = [
                     required: true,
                 },
                 hideExpression: 'model.personType !== "legal"'
+            },
+        ]
+    },
+    {
+        key: 'contractPriceSection',
+        wrappers: ['form-field'],
+        className: 'form-section',
+        templateOptions: {
+            label: 'Precio del Contrato (por producto)',
+        },
+        fieldGroup: [
+            {
+                key: 'ivaIsApplied',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: '¿Aplica IVA?',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Si',
+                            value: true,
+                        },
+                        {
+                            label: 'No',
+                            value: false
+                        },
+                    ]
+                }
+            },
+            {
+                key: 'contractPrice',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Precio del Contrato',
+                    required: true,
+                },
+                hideExpression: 'model.ivaIsApplied !== true'
+            },
+            {
+                key: 'contractPriceInLetters',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Precio del Contrato (en letras)',
+                    required: true,
+                },
+                hideExpression: 'model.ivaIsApplied !== true'
+            },
+            {
+                key: 'unitPrice',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Precio de cada unidad',
+                    required: true,
+                },
+                hideExpression: 'model.ivaIsApplied !== true'
+            },
+            {
+                key: 'unitPriceInLetters',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Precio de cada unidad (en letras)',
+                    required: true,
+                },
+                hideExpression: 'model.ivaIsApplied !== true'
+            },
+        ]
+    },
+    {
+        key: 'payMethodSection',
+        wrappers: ['form-field'],
+        className: 'form-section',
+        templateOptions: {
+            label: 'Forma de Pago',
+        },
+        fieldGroup: [
+            {
+                key: 'withRetainer',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Anticipo',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Aplica',
+                            value: true,
+                        },
+                        {
+                            label: 'No Aplica',
+                            value: false
+                        },
+                    ]
+                }
+            },
+            {
+                key: 'retainerPrice',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Valor',
+                    required: true,
+                },
+                hideExpression: 'model.withRetainer !== true'
+            },
+            {
+                key: 'retainerPriceInLetters',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Valor en letras',
+                    required: true,
+                },
+                hideExpression: 'model.withRetainer !== true'
+            },
+            {
+                key: 'retainerPrc',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Porcentaje',
+                    required: true,
+                },
+                hideExpression: 'model.withRetainer !== true'
+            },
+            {
+                key: 'retainerDate',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Fecha de Pago del anticipo',
+                    required: true,
+                },
+                hideExpression: 'model.withRetainer !== true'
+            },
+            {
+                key: 'withMonthlyPaymentUponDelivery',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: '¿Pago mensual contra entrega?',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Aplica',
+                            value: true,
+                        },
+                        {
+                            label: 'No Aplica',
+                            value: false
+                        },
+                    ]
+                }
+            },
+            {
+                key: 'withOnlyPaymentUponDelivery',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: '¿Es un solo pago contra entrega?',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Aplica',
+                            value: true,
+                        },
+                        {
+                            label: 'No Aplica',
+                            value: false
+                        },
+                    ]
+                }
+            },
+            {
+                key: 'uponDeliveryPrice',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Valor',
+                    required: true,
+                },
+                hideExpression: 'model.withOnlyPaymentUponDelivery !== true'
+            },
+            {
+                key: 'uponDeliveryPriceInLetters',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Valor en letras',
+                    required: true,
+                },
+                hideExpression: 'model.withOnlyPaymentUponDelivery !== true'
+            },
+            {
+                key: 'uponDeliveryPricePrc',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Porcentaje',
+                    required: true,
+                },
+                hideExpression: 'model.withOnlyPaymentUponDelivery !== true'
+            },
+            {
+                key: 'anotherPaymentMethod',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Otra forma de pago',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Aplica',
+                            value: true,
+                        },
+                        {
+                            label: 'No Aplica',
+                            value: false
+                        },
+                    ]
+                }
+            },
+            {
+                key: 'anotherPaymentMethodDescr',
+                type: 'textarea',
+                className: 'form-section-row',
+                defaultValue: 'xx % del valor del CONTRATO, correspondiente a la suma de xxxxxxxxxxx  M/cte ($ xxxxxx) IVA incluido, por concepto de _______. ',
+                templateOptions: {
+                    label: '',
+                    required: true,
+                    rows: 5,
+                },
+                hideExpression: 'model.anotherPaymentMethod !== true'
+            },
+            {
+                key: 'isPriceInUsd',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: '¿Precio fijado en Dólares US?',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Aplica',
+                            value: true,
+                        },
+                        {
+                            label: 'No Aplica',
+                            value: false
+                        },
+                    ]
+                }
+            },
+        ]
+    },
+    {
+        key: 'durationSection',
+        wrappers: ['form-field'],
+        className: 'form-section',
+        templateOptions: {
+            label: 'Sección Duración',
+        },
+        fieldGroup: [{
+            key: 'contractDuration',
+            type: 'input',
+            className: 'form-section-row',
+            templateOptions: {
+                label: 'Término de duración del Contrato',
+                required: true,
+            },
+        }]
+    },
+    {
+        key: 'guaranteeSection',
+        wrappers: ['form-field'],
+        className: 'form-section',
+        templateOptions: {
+            label: 'Sección Garantía',
+        },
+        fieldGroup: [
+            {
+                key: 'isGuaranteeApplied',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: '¿Aplica garantía?',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Aplica',
+                            value: true,
+                        },
+                        {
+                            label: 'No Aplica',
+                            value: false
+                        },
+                    ]
+                },
+            },
+            {
+                key: 'guaranteeAppliedOptions',
+                type: 'multicheckbox',
+                className: 'form-section-row',
+                templateOptions: {
+                    required: true,
+                    options: [
+                        {
+                            label: 'Cumplimiento del Contrato',
+                            value: 'Cumplimiento del Contrato',
+                        },
+                        {
+                            label: 'Buen manejo de anticipo',
+                            value: 'Buen manejo de anticipo',
+                        },
+                        {
+                            label: 'Salarios y prestaciones sociales',
+                            value: 'Salarios y prestaciones sociales',
+                        },
+                        {
+                            label: 'De calidad del bien o servicio',
+                            value: 'De calidad del bien o servicio',
+                        },
+                        {
+                            label: 'Responsabilidad civil contractual',
+                            value: 'Responsabilidad civil contractual',
+                        },
+                    ],
+                },
+                hideExpression: 'model.isGuaranteeApplied !== true'
+            }
+        ]
+    },
+    {
+        key: 'dateSection',
+        wrappers: ['form-field'],
+        className: 'form-section',
+        templateOptions: {
+            label: 'Sección Fechas',
+        },
+        fieldGroup: [
+            {
+                key: 'contractSubscription',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Suscripción del contrato',
+                    required: true,
+                }
+            }
+        ]
+    },
+    {
+        key: 'filesSection',
+        wrappers: ['form-field'],
+        className: 'form-section',
+        templateOptions: {
+            label: 'Sección Adjuntos',
+        },
+        fieldGroup: [
+            {
+                key: 'certificatedOfExistencePorvenir',
+                type: 'file',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Certificados de existencia y representación legal de Porvenir',
+                }
+            },
+            {
+                key: 'certificatedOfExistenceContractor',
+                type: 'file',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Certificados de existencia y representación legal del Contratista',
+                }
+            },
+            {
+                key: 'proposalByContractor',
+                type: 'file',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Contentivo de la propuesta presentada por el  Contratista',
+                }
+            },
+            {
+                key: 'generateConfidentialityAgreement',
+                type: 'checkbox',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Generar Acuerdo de Confidencialidad',
+                    required: true
+                }
             },
         ]
     }

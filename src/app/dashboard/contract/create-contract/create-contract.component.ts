@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {FormlyFieldConfig} from '@ngx-formly/core';
+import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
 import {createContractFields} from './contract-form-builder';
 
 @Component({
@@ -13,6 +13,11 @@ export class CreateContractComponent implements OnInit {
   form = new FormGroup({});
   model: any = {};
   fields = createContractFields;
+  options: FormlyFormOptions = {
+    formState: {
+      awesomeIsForced: false,
+    },
+  };
 
   constructor() {}
 
@@ -21,5 +26,9 @@ export class CreateContractComponent implements OnInit {
 
   save(): void {
     console.log(this.model);
+  }
+
+  requireInfo(): void {
+    console.log('requireInfo');
   }
 }
