@@ -11,7 +11,7 @@ import { DownloadContractComponent } from './download-contract/download-contract
 
 @NgModule({
   declarations: [CreateContractComponent, ContractStatesComponent, ContractDownloadComponent, DownloadContractComponent],
-  
+
   imports: [
     CommonModule,
     ContractRoutingModule,
