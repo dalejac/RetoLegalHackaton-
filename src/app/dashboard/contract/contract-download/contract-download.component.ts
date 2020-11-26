@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import * as htmlDocx from 'html-docx-js/dist/html-docx'; 
-import { saveAs } from 'file-saver';
+// import { Component, OnInit } from '@angular/core';
+// import * as htmlDocx from 'html-docx-js/dist/html-docx'; 
+// import { saveAs } from 'file-saver';
 
-@Component({
-  selector: 'app-contract-download',
-  templateUrl: './contract-download.component.html',
-  styleUrls: ['./contract-download.component.scss']
-})
-export class ContractDownloadComponent implements OnInit {
+// @Component({
+//   selector: 'app-contract-download',
+//   templateUrl: './contract-download.component.html',
+//   styleUrls: ['./contract-download.component.scss']
+// })
+// export class ContractDownloadComponent implements OnInit {
 
-  constructor() { }
+//   constructor() { }
 
-  ngOnInit(): void {
-  }
+//   ngOnInit(): void {
+//   }
 
-  public download(): void {
-    let htmlDocument = '<!DOCTYPE html><html><head><meta charset="utf-8"><title></title>';
-    htmlDocument = htmlDocument + '</head><body>' + 'CONTRATO' + '</body></html>';
-    const converted = htmlDocx.asBlob(htmlDocument);
-    saveAs(converted, 'TITULO DE CONTRATO' + '.docx');
-  }
+//   public download(): void {
+//     let htmlDocument = '<!DOCTYPE html><html><head><meta charset="utf-8"><title></title>';
+//     htmlDocument = htmlDocument + '</head><body>' + 'CONTRATO' + '</body></html>';
+//     const converted = htmlDocx.asBlob(htmlDocument);
+//     saveAs(converted, 'TITULO DE CONTRATO' + '.docx');
+//   }
 
-}
+// }
