@@ -1,323 +1,244 @@
-import {
-    DynamicFormGroupModel,
-    DynamicFormModel,
-    DynamicInputModel,
-    DynamicRadioGroupModel,
-    DynamicSelectModel
-} from '@ng-dynamic-forms/core';
+import {FormlyFieldConfig} from '@ngx-formly/core';
 
-export const contractFormModel: DynamicFormModel = [
-    new DynamicFormGroupModel({
-        id: 'generalInfoSection',
-        legend: 'Datos Generales',
-        group: [
-            new DynamicSelectModel({
-                id: 'interestedArea',
-                label: 'Área interna interesada en el proceso',
-                options: [
-                    {
-                        label: 'Option 1',
-                        value: 'option-1',
-                    },
-                    {
-                        label: 'Option 2',
-                        value: 'option-2'
-                    },
-                    {
-                        label: 'Option 3',
-                        value: 'option-3'
-                    }
-                ]
-            }),
-            new DynamicSelectModel({
-                id: 'contractType',
-                label: 'Tipo de Contrato',
-                options: [
-                    {
-                        label: 'Option 1',
-                        value: 'option-1',
-                    },
-                    {
-                        label: 'Option 2',
-                        value: 'option-2'
-                    },
-                    {
-                        label: 'Option 3',
-                        value: 'option-3'
-                    }
-                ]
-            }),
-            new DynamicSelectModel({
-                id: 'personType',
-                label: 'Tipo de Person',
-                options: [
-                    {
-                        label: 'Natural',
-                        value: 'natural',
-                    },
-                    {
-                        label: 'Jurídico',
-                        value: 'legal'
-                    }
-                ]
-            }),
-            new DynamicInputModel({
-                id: 'legalRepresentative',
-                label: 'Representante Legal',
-                maxLength: 42,
-            }),
-            new DynamicInputModel({
-                id: 'legalRepresentativeId',
-                label: 'N° de cédula de identificación',
-                maxLength: 42,
-            }),
-            new DynamicInputModel({
-                id: 'roleDefinition',
-                label: 'En su calidad de:',
-                maxLength: 42
-            }),
-            new DynamicInputModel({
-                id: 'providerName',
-                label: 'Nombre del Proveedor',
-                maxLength: 42
-            }),
-            new DynamicInputModel({
-                id: 'providerId',
-                label: 'N° de cédula de identificación (NIT)',
-                maxLength: 42
-            }),
-            new DynamicInputModel({
-                id: 'providerMainAddress',
-                label: 'Domicilio Principal en',
-                maxLength: 42
-            }),
-            new DynamicInputModel({
-                id: 'chamberOfCommerce',
-                label: 'Cámara de Comercio',
-                maxLength: 42
-            }),
+export const createContractFields: FormlyFieldConfig[] = [
+    {
+        key: 'generalInfoSection',
+        wrappers: ['form-field'],
+        className: 'form-section',
+        templateOptions: {
+            label: 'Datos Generales',
+        },
+        fieldGroup: [
+            {
+                key: 'interestedArea',
+                type: 'select',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Área interna interesada en el proceso',
+                    required: true,
+                    className: 'option-abc',
+                    options: [
+                        {
+                            label: 'Gerencia de Servicios Tecnológicos',
+                            value: 'Gerencia de Servicios Tecnológicos',
+                        },
+                        {
+                            label: 'Gerencia de Talento y Servicios Administrativos',
+                            value: 'Gerencia de Talento y Servicios Administrativos'
+                        },
+                        {
+                            label: 'Gerencia de Innovación y Transformación Digital',
+                            value: 'Gerencia de Innovación y Transformación Digital'
+                        },
+                        {
+                            label: 'Gerencia de Mercadeo',
+                            value: 'Gerencia de Mercadeo'
+                        },
+                        {
+                            label: 'Gerencias Regionales (5)',
+                            value: 'Gerencias Regionales (5)'
+                        },
+                        {
+                            label: 'Gerencia Nacional Porvenir Inversiones',
+                            value: 'Gerencia Nacional Porvenir Inversiones'
+                        },
+                        {
+                            label: 'Gerencia Desarrollo Comercial',
+                            value: 'Gerencia Desarrollo Comercial'
+                        },
+                        {
+                            label: 'Gerencia Sector Público / VEX – PO/PI',
+                            value: 'Gerencia Sector Público / VEX – PO/PI'
+                        },
+                        {
+                            label: 'Gerencia de Beneficios Pensionales',
+                            value: 'Gerencia de Beneficios Pensionales'
+                        },
+                        {
+                            label: 'Gerencia de Integración Operativa',
+                            value: 'Gerencia de Integración Operativa'
+                        },
+                        {
+                            label: 'Gerencia de Clientes',
+                            value: 'Gerencia de Clientes'
+                        },
+                        {
+                            label: 'Gerencia de Portafolio PO y CES',
+                            value: 'Gerencia de Portafolio PO y CES'
+                        },
+                        {
+                            label: 'Gerencia de Estrategia',
+                            value: 'Gerencia de Estrategia'
+                        },
+                        {
+                            label: 'Gerencia de Portafolio PV y PA',
+                            value: 'Gerencia de Portafolio PV y PA'
+                        },
+                        {
+                            label: 'Gerencia de Análisis de Inversiones',
+                            value: 'Gerencia de Análisis de Inversiones'
+                        },
+                        {
+                            label: 'Gerencia de Actuación Judicial',
+                            value: 'Gerencia de Actuación Judicial'
+                        },
+                        {
+                            label: 'Gerencia Jurídica Corporativa',
+                            value: 'Gerencia Jurídica Corporativa'
+                        },
+                        {
+                            label: 'Gerencia de Contabilidad',
+                            value: 'Gerencia de Contabilidad'
+                        },
+                        {
+                            label: 'Gerencia de Operaciones Financieras',
+                            value: 'Gerencia de Operaciones Financieras'
+                        },
+                        {
+                            label: 'Gerencia de Planeación',
+                            value: 'Gerencia de Planeación'
+                        },
+                        {
+                            label: 'Gerencia de Riesgo de Negocio',
+                            value: 'Gerencia de Riesgo de Negocio'
+                        },
+                        {
+                            label: 'Gerencia de Riesgo de Financiero',
+                            value: 'Gerencia de Riesgo de Financiero'
+                        }
+                    ]
+                }
+            },
+            {
+                key: 'contractType',
+                type: 'select',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Tipo de Contrato',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Arrendamiento',
+                            value: 'Arrendamiento',
+                        },
+                        {
+                            label: 'Consultoría',
+                            value: 'Consultoría'
+                        },
+                        {
+                            label: 'Cesión de Espacio',
+                            value: 'Cesión de Espacio'
+                        },
+                        {
+                            label: 'Compraventa',
+                            value: 'Compraventa'
+                        },
+                        {
+                            label: 'Prestación de Servicios',
+                            value: 'Prestación de Servicios'
+                        }
+                    ]
+                }
+            },
+            {
+                key: 'personType',
+                type: 'select',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Tipo de Persona',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Natural',
+                            value: 'natural',
+                        },
+                        {
+                            label: 'Jurídico',
+                            value: 'legal'
+                        }
+                    ],
+                }
+            },
+            {
+                key: 'personFullName',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Nombre y Apellido',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "natural"'
+            },
+            {
+                key: 'personId',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'N° de cédula de identificación',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "natural"'
+            },
+            {
+                key: 'personMainAddress',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Domicilio Principal en',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "natural"'
+            },
+            {
+                key: 'chamberOfCommerce',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Cámara de Comercio',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "natural"'
+            },
+            {
+                key: 'legalRepresentative',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Representante Legal',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "legal"'
+            },
+            {
+                key: 'roleDefinition',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'En su calidad de',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "legal"'
+            },
+            {
+                key: 'legalRepresentativeName',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Nombre del Proveedor',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "legal"'
+            },
+            {
+                key: 'legalRepresentativeId',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'N° de cédula de identificación (NIT)',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "legal"'
+            },
         ]
-    }),
-    new DynamicFormGroupModel({
-        id: 'contractPriceSection',
-        legend: 'Precio del Contrato',
-        group: [
-            new DynamicRadioGroupModel<boolean>({
-                id: 'isIvaApplied',
-                label: '¿Aplica IVA?',
-                options: [
-                    {
-                        label: 'Si',
-                        value: true,
-                    },
-                    {
-                        label: 'No',
-                        value: false,
-                    }
-                ]
-            }),
-            new DynamicInputModel({
-                id: 'contractPrice',
-                label: 'Precio del Contrato',
-                maxLength: 42
-            }),
-            new DynamicInputModel({
-                id: 'contractPriceInLetters',
-                label: 'Precio en letras',
-                maxLength: 42
-            }),
-            new DynamicInputModel({
-                id: 'contractPricePerUnit',
-                label: 'Precio de cada unidad',
-                maxLength: 42
-            }),
-            new DynamicInputModel({
-                id: 'contractPricePerUnitInLetters',
-                label: 'Precio en Letras',
-                maxLength: 42
-            }),
-        ]
-    }),
-    new DynamicFormGroupModel({
-        id: 'payMethodSection',
-        legend: 'Forma de Pago',
-        group: [
-            new DynamicRadioGroupModel<boolean>({
-                id: 'retainer',
-                label: 'Anticipo',
-                options: [
-                    {
-                        label: 'Aplica',
-                        value: true,
-                    },
-                    {
-                        label: 'No Aplica',
-                        value: false,
-                    }
-                ]
-            }),
-            new DynamicInputModel({
-                id: 'pricePerUnit',
-                label: 'Precio de cada unidad',
-                maxLength: 42
-            }),
-        ]
-    })
-];
-
-export const contractFormLayout = {
-    interestedArea: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    contractType: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    personType: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    legalRepresentative: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    legalRepresentativeId: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    roleDefinition: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    providerName: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    providerId: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    providerMainAddress: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    chamberOfCommerce: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    isIvaApplied: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    contractPrice: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    contractPriceInLetters: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    contractPricePerUnit: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    contractPricePerUnitInLetters: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    retainer: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
-    },
-    pricePerUnit: {
-        element: {
-            label: 'create-contract-form-label'
-        },
-        grid: {
-            label: 'flex-col',
-            control: 'flex-col form-control',
-        }
     }
-};
-
+];

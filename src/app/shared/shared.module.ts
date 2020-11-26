@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { DynamicFormsBasicUIModule} from '@ng-dynamic-forms/ui-basic';
 import {ReactiveFormsModule} from '@angular/forms';
+import {FormlyModule} from '@ngx-formly/core';
+import {FormlyBootstrapModule} from '@ngx-formly/bootstrap';
 
 
 
@@ -15,7 +16,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   exports: [
     NavbarComponent,
     ReactiveFormsModule,
-    DynamicFormsBasicUIModule,
+    FormlyModule,
+    FormlyBootstrapModule
   ]
 })
 export class SharedModule { }
