@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as htmlDocx from 'html-docx-js/dist/html-docx'; 
-import { saveAs } from 'file-saver';
 import {ContractGeneratorService} from '../../../core/services/files/contract-generator.service';
 
 @Component({
@@ -16,6 +14,6 @@ export class ContractStatesComponent implements OnInit {
   }
 
   public download(): void {
-    this.contractGeneratorService.downloadContract();
+    this.contractGeneratorService.downloadContract({});
   }
 }

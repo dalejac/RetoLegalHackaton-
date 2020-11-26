@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {ContractGenerator} from './contract-generator';
-import {achievements, education, experiences, skills} from './contract-data';
 
 import { Packer } from 'docx';
 import { saveAs } from 'file-saver';
@@ -12,18 +11,14 @@ export class ContractGeneratorService {
 
   constructor() { }
 
-  downloadContract(): void {
+  downloadContract(contractInfo: any): void {
     const contractGenerator = new ContractGenerator();
     const doc = contractGenerator.create([
-      experiences,
-      education,
-      skills,
-      achievements
+      contractInfo
     ]);
 
     Packer.toBlob(doc).then(blob => {
-      console.log(blob);
-      saveAs(blob, 'example.docx');
+      saveAs(blob, 'Contrato.docx');
       console.log('Document created successfully');
     });
   }
