@@ -5,6 +5,7 @@ import {AuthService} from '../../../core/services/auth/auth.service';
 import {UserRole} from '../../../core/types/user-type.type';
 import {SupplierContractFormBuilder} from './supplier-contract-form-builder';
 import {UserContractFormBuilder} from './user-contract-form-builder';
+import { FirestoreService } from '../../services/contract.service';
 
 @Component({
   selector: 'app-create-contract',
@@ -22,7 +23,9 @@ export class CreateContractComponent implements OnInit {
     },
   };
 
-  constructor(private authService: AuthService) {}
+  data = [];
+
+  constructor(private authService: AuthService, private firestoreServie: FirestoreService) {}
 
   ngOnInit(): void {
   }
