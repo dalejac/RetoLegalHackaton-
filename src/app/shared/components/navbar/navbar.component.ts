@@ -10,12 +10,15 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   userRoleLabel = '';
+  currentUserRole;
+  userRole = UserRole;
+
   constructor(private authService: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {
-    const currentUserRole = this.authService.currentUserRole();
-    this.userRoleLabel = currentUserRole === UserRole.User ? 'Área Usuaria' : 'Área Abastecimiento'
+    this.currentUserRole = this.authService.currentUserRole();
+    this.userRoleLabel = this.currentUserRole === UserRole.User ? 'Área Usuaria' : 'Área Abastecimiento';
   }
 
   logout(): void {

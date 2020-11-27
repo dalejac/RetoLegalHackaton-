@@ -12,7 +12,7 @@ import {
     simpleText,
     subTitle
 } from '../file-helpers';
-import {AlignmentType, Paragraph} from 'docx';
+import {Paragraph} from 'docx';
 
 export const contractClausesSection  = (contract: Contract) => {
     return [
@@ -34,23 +34,23 @@ export const contractClausesSection  = (contract: Contract) => {
         conflictsOfInterestClause(),
         contractorDeclarations(),
         antiFraudAndAntiCorruptionClause(),
-        ...personalDataTreatmentClause(),
-        ...cyberSecurityClause(),
+        ...personalDataTreatmentClause(contract),
+        ...cyberSecurityClause(contract),
         indemnityClause(),
         fortuitousEventClause(),
         guaranteeClause2(),
         transferClause(),
         modificationsClause(),
         coordinationClause(),
-        ...contractorInformationSection(),
-        ...porvenirInformationSection(),
+        ...contractorInformationSection(contract),
+        ...porvenirInformationSection(contract),
         taxesClause(),
         authorizationClause(),
         suspensionClause(),
         conflictsResolutionClause(),
         noWaiverClause(),
         domicileClause(),
-        ...annexesClause(),
+        ...annexesClause(contract),
         prevalenceClause(),
         finalSection(),
         ...signaturesSection()
@@ -59,97 +59,171 @@ export const contractClausesSection  = (contract: Contract) => {
 
 
 export const objectAndScopeClause = (contract: Contract) => {
+    const isTrading = contract?.contractObjectiveSection?.purposeOfTheContract === 'trading';
+    const tradingOf = contract?.contractObjectiveSection?.tradingOf;
+    const tradingAndDistributionOf = contract?.contractObjectiveSection?.tradingAndDistributionOf;
+    const unitNumbers = contract?.contractObjectiveSection?.unitNumbers;
+    const tradingMessage = ` a título de compraventa, a la venta de (${unitNumbers}) unidades del producto “${tradingOf}” de conformidad con la `;
+    const tradingAndDistributionMessage = ` a título de compraventa, a la venta y distribución de (${unitNumbers}) unidades del producto “${tradingAndDistributionOf}” de conformidad con la `;
+    const message = isTrading ? tradingMessage : tradingAndDistributionMessage;
+
+    const defaultMessage = [
+        contractorWord,
+        simpleText(', y en contraprestación por la compraventa '),
+        porvenirWord,
+        simpleText(' se obliga a pagar el precio convenido.')
+    ];
+
+    const requireCommercialOffer = contract?.contractObjectiveSection?.requireCommercialOffer;
+    const commercialOfferMessage =
+        requireCommercialOffer
+        ?
+            [
+                boldAllCapsText('Oferta Comercial'),
+                simpleText(` de fecha ${contract?.contractObjectiveSection?.commercialOfferDate}  presentada   por `),
+                ...defaultMessage
+            ]
+        :   [...defaultMessage];
+
     return new Paragraph({
         style: 'section',
         children: [
             boldAllCapsText('PRIMERA. - OBJETO Y ALCANCE: EL CONTRATISTA '),
             simpleText('actuando con sus propios medios, bajo su cuenta y riesgo, con autonomía técnica y administrativa, se obliga para con '),
             porvenirWord,
-            simpleText(' a título de compraventa, a la venta y distribución de XXX11.1XXXX (XX) unidades del producto“XXXXXX11 XXXXXXX”de conformidad con la '),
-            boldAllCapsText('Oferta Comercial'),
-            simpleText(' de fecha x13xxx (xxx)de   xxxxx   presentada   por '),
-            contractorWord,
-            simpleText(', y en contraprestación por la compraventa '),
-            porvenirWord,
-            simpleText(' se obliga a pagar el precio convenido.'),
+            simpleText(message),
+            ...commercialOfferMessage
         ]
     });
 };
 
 export const priceClause = (contract: Contract) => {
-    return [
-        new Paragraph({
-            style: 'section',
+
+    const isTrading = contract?.contractObjectiveSection?.purposeOfTheContract === 'trading';
+    const tradingOf = contract?.contractObjectiveSection?.tradingOf;
+    const tradingAndDistributionOf = contract?.contractObjectiveSection?.tradingAndDistributionOf;
+    const unitNumbers = contract?.contractObjectiveSection?.unitNumbers;
+    const unitPriceMessage = ` ${contract?.contractPriceSection?.unitPriceInLetters.toUpperCase()} M/ cte ($ ${contract?.contractPriceSection?.unitPrice})`;
+    const contractPriceMessage = ` ${contract?.contractPriceSection?.contractPriceInLetters.toUpperCase()} M/ cte ($ ${contract?.contractPriceSection?.contractPrice})`;
+    const ivaIsApplied = contract?.contractPriceSection?.ivaIsApplied;
+
+    const ivaParagraph = new Paragraph(
+        {
             children: [
-                boldAllCapsText('SEGUNDA. - VALOR: PORVENIR '),
-                simpleText('se obliga a pagar al '),
-                boldAllCapsText('Contratista'),
-                simpleText(' la suma de'),
-                boldAllCapsText(' xxxxx17xxxxxxxxx M/ cte ($ xxxxxxx)'),
-                simpleText(' IVA incluido,  por cada XXX11 X vendido y entregado, para un total de'),
-                boldAllCapsText(' XXXXXXXXX16 XXXXXXXXXX M/cte  ($  XXXXX)'),
-                simpleText(' IVA incluido, por xx11.1 xxxx (xx)unidades del producto “xxxx11 xxxxx”.')
+                boldAllCapsText('Paragráfo Primero '),
+                simpleText('Los productos solicitados a '),
+                contractorWord,
+                simpleText(' se realizarán a demanda y de acuerdo a las necesidades de '),
+                porvenirWord
             ]
-        }),
-        new Paragraph(
-            {
-                children: [
-                    boldAllCapsText('Paragráfo Primero '),
-                    simpleText('Los productos solicitados a '),
-                    contractorWord,
-                    simpleText(' se realizarán a demanda y de acuerdo a las necesidades de '),
-                    porvenirWord
-                ]
-            }),
-        new Paragraph(
-            {
-                children: [
-                    boldAllCapsText('Paragráfo Segundo '),
-                    simpleText('Dentro del precio se encuentran incluidos la totalidad de los gastos requeridos por '),
-                    contractorWord,
-                    simpleText(' para la ejecución del objeto contractual. En consecuencia, todos los gastos e impuestos que se generen en desarrollo del '),
-                    contractWord,
-                    simpleText(' serán asumidos por '),
-                    contractorWord
-                ]
-            }),
-        new Paragraph(
-            {
-                children: [
-                    boldAllCapsText('Paragráfo Tercero '),
-                    simpleText('El valor del '),
-                    contractorWord,
-                    simpleText('quedará inalterable durante el periodo de duración,  sin  que pueda invocarse ningún tipo de alza o costo para un eventual ajuste. '),
-                    porvenirWord,
-                    simpleText(' podrá reducir el monto de la cuota respectiva, en caso que '),
-                    contractorWord,
-                    simpleText(' no acredite la ejecución de la totalidad del objeto del '),
-                    contractWord,
-                    simpleText(' a que se ha comprometido, quedando '),
-                    porvenirWord,
-                    simpleText(' obligado a pagar el monto de lo efectivamente ejecutado.'),
-                ]
-            }),
-        new Paragraph(
-            {
-                children: [
-                    boldAllCapsText('Paragráfo Cuarto '),
-                    simpleText('Los recibos parciales de las tareas ejecutadas que se hagan al'),
-                    contractorWord,
-                    simpleText('no implican aceptación final por parte de '),
-                    porvenirWord,
-                    simpleText(' como quiera que la obligación principal del '),
-                    contractorWord,
-                    simpleText(' es la de ejecutar completamente el objeto del'),
-                    contractWord,
-                    simpleText(' aquí convenido en su integridad y en la forma y tiempo debidos'),
-                ]
-            })
+        });
+    const restOfParagraph = [
+            new Paragraph(
+                {
+                    children: [
+                        boldAllCapsText('Paragráfo Segundo '),
+                        simpleText('Dentro del precio se encuentran incluidos la totalidad de los gastos requeridos por '),
+                        contractorWord,
+                        simpleText(' para la ejecución del objeto contractual. En consecuencia, todos los gastos e impuestos que se generen en desarrollo del '),
+                        contractWord,
+                        simpleText(' serán asumidos por '),
+                        contractorWord
+                    ]
+                }),
+            new Paragraph(
+                {
+                    children: [
+                        boldAllCapsText('Paragráfo Tercero '),
+                        simpleText('El valor del '),
+                        contractorWord,
+                        simpleText('quedará inalterable durante el periodo de duración,  sin  que pueda invocarse ningún tipo de alza o costo para un eventual ajuste. '),
+                        porvenirWord,
+                        simpleText(' podrá reducir el monto de la cuota respectiva, en caso que '),
+                        contractorWord,
+                        simpleText(' no acredite la ejecución de la totalidad del objeto del '),
+                        contractWord,
+                        simpleText(' a que se ha comprometido, quedando '),
+                        porvenirWord,
+                        simpleText(' obligado a pagar el monto de lo efectivamente ejecutado.'),
+                    ]
+                }),
+            new Paragraph(
+                {
+                    children: [
+                        boldAllCapsText('Paragráfo Cuarto '),
+                        simpleText('Los recibos parciales de las tareas ejecutadas que se hagan al'),
+                        contractorWord,
+                        simpleText('no implican aceptación final por parte de '),
+                        porvenirWord,
+                        simpleText(' como quiera que la obligación principal del '),
+                        contractorWord,
+                        simpleText(' es la de ejecutar completamente el objeto del'),
+                        contractWord,
+                        simpleText(' aquí convenido en su integridad y en la forma y tiempo debidos'),
+                    ]
+                })
+        ];
+
+    const defaultMessage = [
+        boldAllCapsText('SEGUNDA. - VALOR: PORVENIR '),
+        simpleText('se obliga a pagar al '),
+        boldAllCapsText('Contratista'),
+        simpleText(' la suma de'),
+        boldAllCapsText(unitPriceMessage),
     ];
+
+    return ivaIsApplied
+        ? [
+            new Paragraph({
+                style: 'section',
+                children: [
+                    ...defaultMessage,
+                    simpleText(` IVA incluido, por cada ${isTrading ? tradingOf : tradingAndDistributionOf} vendido y entregado, para un total de`),
+                    boldAllCapsText(contractPriceMessage),
+                    simpleText(`  IVA incluido, por ${unitNumbers} unidades del producto “${isTrading ? tradingOf : tradingAndDistributionOf}”.`)
+                ]
+            }),
+            ivaParagraph,
+            ...restOfParagraph
+        ] : [
+            new Paragraph({
+                style: 'section',
+                children: [
+                    ...defaultMessage,
+                    simpleText(` por cada ${isTrading ? tradingOf : tradingAndDistributionOf} vendido y entregado, para un total de`),
+                    boldAllCapsText(contractPriceMessage),
+                    simpleText(` por ${unitNumbers} unidades del producto “${isTrading ? tradingOf : tradingAndDistributionOf}”.`)
+                ]
+            }),
+            ...restOfParagraph
+        ];
 };
 
-
 const paymentMethodClause = (contract: Contract) => {
+    const isWithRetainer = contract?.payMethodSection?.isWithRetainer;
+    const isWithMonthlyPaymentUponDelivery = contract?.payMethodSection?.isWithMonthlyPaymentUponDelivery;
+    const isWithOnlyPaymentUponDelivery = contract?.payMethodSection?.isWithOnlyPaymentUponDelivery;
+    const isAnotherPaymentMethod = contract?.payMethodSection?.isAnotherPaymentMethod;
+
+    const ivaIsApplied = contract?.contractPriceSection?.ivaIsApplied;
+    let message = '';
+
+    if (isWithRetainer) {
+        message = `${message} ${contract?.payMethodSection?.retainerPrc} % del valor del CONTRATO, correspondiente a la suma de ${contract?.payMethodSection?.retainerPriceInLetters} M/cte ($ ${contract?.payMethodSection?.retainerPrice}) ${ivaIsApplied ? 'IVA incluido' : ''}, por concepto de anticipo el ${contract?.payMethodSection?.retainerDate}.`;
+    }
+
+    if (isWithMonthlyPaymentUponDelivery) {
+        message = `${message} Pagos mensuales por las unidades de producto entregados y recibidos a satisfacción de PORVENIR durante el mes inmediatamente anterior.`;
+    }
+
+    if (isWithOnlyPaymentUponDelivery) {
+        message = `${message} Un único pago por la suma de ${contract?.payMethodSection?.uponDeliveryPriceInLetters} Mcte (${contract?.payMethodSection?.uponDeliveryPrice}) correspondiente al ${contract?.payMethodSection?.uponDeliveryPricePrc} % del CONTRATO, previa entrega y recibo a satisfacción de PORVENIR de los bienes objeto de compraventa `;
+    }
+
+    if (isAnotherPaymentMethod) {
+        message = `${message} ${contract?.payMethodSection?.anotherPaymentMethodDescr}`;
+    }
+
     return [
         new Paragraph(
             {
@@ -159,7 +233,7 @@ const paymentMethodClause = (contract: Contract) => {
                     simpleText('El valor será pagado por '),
                     boldAllCapsText('Porvenir '),
                     simpleText('de la siguiente manera: '),
-                    simpleText('- XXXXXXXXXXXXXXXXXXXXXXXXXX '),
+                    simpleText(`- ${message}`),
                 ]
             }),
         new Paragraph(
@@ -196,19 +270,28 @@ const paymentMethodClause = (contract: Contract) => {
 };
 
 const durationClause = (contract: Contract) => {
+    const duration = contract?.durationSection?.contractDuration;
     return new Paragraph(
         {
             style: 'section',
             children: [
                 boldAllCapsText('Cuarta. - Duración: '),
-                simpleText('El término de duración es de XXXX24XXX (XXX) meses, contados a partir de la firma del '),
+                simpleText(`El término de duración es de ${duration}, contados a partir de la firma del `),
                 contractWord,
             ]
         });
 };
 
 const contractorObligationsClause = (contract: Contract) => {
-    return [
+    const isSupplierDirectManufacturer = contract?.obligationsSection?.isSupplierDirectManufacturer;
+    const isSupplierAssumeWarehousing = contract?.obligationsSection?.isSupplierAssumeWarehousing;
+    const isTrading = contract?.contractObjectiveSection?.purposeOfTheContract === 'trading';
+    const tradingOf = contract?.contractObjectiveSection?.tradingOf;
+    const tradingAndDistributionOf = contract?.contractObjectiveSection?.tradingAndDistributionOf;
+    const message = isTrading ? tradingOf : tradingAndDistributionOf;
+    const requireDeliveryDate = contract?.deliverySection?.requireDeliveryDate;
+
+    const obligations =  [
         new Paragraph(
             {
                 style: 'justified',
@@ -243,71 +326,7 @@ const contractorObligationsClause = (contract: Contract) => {
         new Paragraph({
             style: 'justified',
             children: [
-                simpleText('Asegurarse y garantizar a'),
-                boldAllCapsText('Contrato.'),
-                simpleText('que el “XXX11XXXX” provenga directamente del fabricante para garantizar la vida útil del producto.')
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Asumir el valor requerido para el embalaje y transporte de los bienes hasta el lugar que indique'),
-                boldAllCapsText('Porvenir.'),
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Asumir por su cuenta los costos de bodegaje.'),
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Entregar los bienes el XX25.2 XX en buen estado y libres de defectos, así como responder por vicios ocultos y de evicción.'),
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Remitir reportes xxx 28.5  xxx  a solicitud de '),
-                boldAllCapsText('Porvenir'),
-                simpleText(' para corroborar el cumplimiento de la ejecución del'),
-                contractWord
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Entregar los bienes objeto del presente '),
-                contractWord,
-                simpleText(' en los lugares y fechas que '),
-                porvenirWord,
-                simpleText(' le indique'),
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Remplazar dentro de xxx (xxx), los bienes defectuosos o que no se ajusten a la referencia solicitada por '),
+                simpleText(`Remplazar dentro de ${contract?.obligationsSection?.returnMaxTimeAgreement}, los bienes defectuosos o que no se ajusten a la referencia solicitada por `),
                 porvenirWord,
             ],
             bullet: {
@@ -351,65 +370,6 @@ const contractorObligationsClause = (contract: Contract) => {
         new Paragraph({
             style: 'justified',
             children: [
-                simpleText('Presentar a '),
-                porvenirWord,
-                simpleText(' el correspondiente certificado de desinfección de los productos objeto de compraventa.'),
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Asegurar  la ejecución del '),
-                contractWord,
-                simpleText(' dentro  de los  tiempos   establecidos   en el cronograma.'),
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Guardar la reserva y confidencialidad en relación con cualquier tipo de información, política, procedimiento y en general cualquier secreto que en razón del '),
-                contractWord,
-                simpleText(' '),
-                porvenirWord,
-                simpleText(' le dé a conocer o al cual llegue a tener acceso o conocimiento '),
-                contractorWord,
-                simpleText(' que participen en las labores necesarias para el desarrollo del objeto contractual, deberán suscribir un documento de confidencialidad para el mantenimiento y reserva de los secretos industriales de'),
-                porvenirWord,
-                simpleText(' a los cuales tengan acceso en tal virtud o con ocasión de su participación en las labores de capacitación y asistencia técnica.'),
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
-                simpleText('Una vez terminada la labor encomendada bajo cualquier circunstancia, '),
-                contractorWord,
-                simpleText(' deberá devolver a '),
-                porvenirWord,
-                simpleText(' , dentro de los cinco (5) días hábiles contados a partir de la finalización del '),
-                contractWord,
-                simpleText(' , todos los documentos e información que en forma escrita o impresa en cualquier medio magnético o mecánico que '),
-                porvenirWord,
-                simpleText(' le haya suministrado con ocasión del '),
-                contractWord,
-                simpleText(', información acerca de la cual no podrá realizar ninguna copia duplicado sin la notificación previa y autorización escrita por parte de'),
-                porvenirWord
-            ],
-            bullet: {
-                level: 0,
-            },
-        }),
-        new Paragraph({
-            style: 'justified',
-            children: [
                 simpleText('Las demás obligaciones inherentes a la naturaleza del, '),
                 contractWord
             ],
@@ -418,8 +378,177 @@ const contractorObligationsClause = (contract: Contract) => {
             },
         })
     ];
-};
 
+    if (!isSupplierDirectManufacturer) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Asegurarse y garantizar a '),
+                    porvenirWord,
+                    simpleText(` que el “${message}” provenga directamente del fabricante para garantizar la vida útil del producto.`)
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    if (isSupplierAssumeWarehousing) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Asumir por su cuenta los costos de bodegaje.'),
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    if (requireDeliveryDate) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Entregar los bienes  objeto de compraventa en buen estado y libres de defectos, así como responder por vicios ocultos y de evicción.'),
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    if (contract?.obligationsSection?.arePeriodicReportsAgreed) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText(`Remitir reportes ${contract?.obligationsSection?.periodicReportAgreement} a solicitud de `),
+                    boldAllCapsText('Porvenir'),
+                    simpleText(' para corroborar el cumplimiento de la ejecución del '),
+                    contractWord
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    if (contract?.obligationsSection?.supplierGuaranteeDelivery) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Entregar los bienes objeto del presente '),
+                    contractWord,
+                    simpleText(' en los lugares y fechas que '),
+                    porvenirWord,
+                    simpleText(' le indique.'),
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Asumir el valor requerido para el embalaje y transporte de los bienes hasta el lugar que indique'),
+                    boldAllCapsText('Porvenir.'),
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    if (contract?.obligationsSection?.supplierHaveToPresentDisinfectionCertificate) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Presentar a '),
+                    porvenirWord,
+                    simpleText(' el correspondiente certificado de desinfección de los productos objeto de compraventa.'),
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    if (contract?.obligationsSection?.isWorkScheduleAgreedWithSupplier) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Asegurar  la ejecución del '),
+                    contractWord,
+                    simpleText(' dentro  de los  tiempos establecidos en el cronograma.'),
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    if (contract?.obligationsSection?.supplierNeedAccessToConfidentialInfo) {
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Guardar la reserva y confidencialidad en relación con cualquier tipo de información, política, procedimiento y en general cualquier secreto que en razón del '),
+                    contractWord,
+                    simpleText(' '),
+                    porvenirWord,
+                    simpleText(' le dé a conocer o al cual llegue a tener acceso o conocimiento '),
+                    contractorWord,
+                    simpleText(' que participen en las labores necesarias para el desarrollo del objeto contractual, deberán suscribir un documento de confidencialidad para el mantenimiento y reserva de los secretos industriales de'),
+                    porvenirWord,
+                    simpleText(' a los cuales tengan acceso en tal virtud o con ocasión de su participación en las labores de capacitación y asistencia técnica.'),
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+        obligations.push(
+            new Paragraph({
+                style: 'justified',
+                children: [
+                    simpleText('Una vez terminada la labor encomendada bajo cualquier circunstancia, '),
+                    contractorWord,
+                    simpleText(' deberá devolver a '),
+                    porvenirWord,
+                    simpleText(' , dentro de los cinco (5) días hábiles contados a partir de la finalización del '),
+                    contractWord,
+                    simpleText(' , todos los documentos e información que en forma escrita o impresa en cualquier medio magnético o mecánico que '),
+                    porvenirWord,
+                    simpleText(' le haya suministrado con ocasión del '),
+                    contractWord,
+                    simpleText(', información acerca de la cual no podrá realizar ninguna copia duplicado sin la notificación previa y autorización escrita por parte de'),
+                    porvenirWord
+                ],
+                bullet: {
+                    level: 0,
+                },
+            })
+        );
+    }
+
+    return obligations;
+};
 
 const finishReasonsClause = (contract: Contract) => {
     return new Paragraph(
@@ -518,7 +647,6 @@ const confidentialityClause = (contract: Contract) => {
     ];
 };
 
-
 const noEmploymentRelationship = (contract: Contract) => {
     return [
         new Paragraph(
@@ -565,39 +693,77 @@ const securityAndHealthClause =  (contract: Contract) => {
 const autonomyAndAccountabilityClause =  (contract: Contract) => {
     return new Paragraph(
         {
-  style: 'justified',
-  children: [
+            style: 'justified',
+            children: [
                 boldAllCapsText('DÉCIMA. - AUTONOMÍA Y RESPONSABILIDAD ANTE TERCEROS: '),
                 simpleText(' En la prestación de losservicios contratados,  EL CONTRATISTA  actúa por su propia cuenta y riesgo; posee plenaautonomía   directiva,   administrativa   y   técnica.   En   ningún   caso  EL   CONTRATISTA  estarálegitimado  para  invocar  algún   tipo  de  solidaridad  PORVENIR  en  el  cumplimiento   de  susobligaciones. En el evento en que PORVENIR sea obligado a pagar perjuicios en razón o con ocasión de la ejecución de este CONTRATO y por culpa de EL CONTRATISTA, PORVENIRrepetirá contra éste o compensará el total de los perjuicios de los saldos que deba a  ELCONTRATISTA, sin perjuicio de las acciones legales pertinentes.')
-            ]});
+            ]
+    });
 };
 
 const guaranteeClause = (contract: Contract) => {
-    return [
+    const contractualCivilLiability = contract?.guaranteeSection?.guaranteeAppliedOptions?.contractualCivilLiability;
+    const goodHandlingOfTheAdvance = contract?.guaranteeSection?.guaranteeAppliedOptions?.goodHandlingOfTheAdvance;
+    const complianceWithTheContract = contract?.guaranteeSection?.guaranteeAppliedOptions?.complianceWithTheContract;
+    const qualityOfTheGoodOrService = contract?.guaranteeSection?.guaranteeAppliedOptions?.qualityOfTheGoodOrService;
+    const salariesAndSocialBenefits = contract?.guaranteeSection?.guaranteeAppliedOptions?.salariesAndSocialBenefits;
+
+    const guarantees = [
         new Paragraph(
             {
   style: 'justified',
   children: [
                     boldAllCapsText('DÉCIMA   PRIMERA. - GARANTÍAS: '),
                     simpleText('  EL   CONTRATISTA  se   obliga   a   constituir   con   unacompañía de seguros legalmente autorizada para desarrollar su objeto social en Colombia y enfavor y a satisfacción de PORVENIR, las siguientes pólizas de seguros:'),
-                    simpleText('a) Cumplimiento   del   CONTRATO:   Por   el   treinta   por   ciento   (30%)   del   valor   delCONTRATO y con una vigencia igual a la de su duración y seis (6) meses más;'),
-                    simpleText('b) De Salarios y prestaciones sociales:  Por el veinte por ciento (20%) del valor delCONTRATO con una vigencia igual a la de su duración y tres (3) años más;'),
-                    simpleText('c) De calidad del bien o servicio: Por el treinta por ciento (30%) del valor del CONTRATOy con una vigencia de un (1) año contado a partir de la entrega final de los bienes o lostrabajos a satisfacción de PORVENIR;'),
-                    simpleText('d) De   responsabilidad   civil   extracontractual:  que   ampare   los   posibles   perjuicioscausados a terceros, por el veinte por ciento (20%)del valor estimado del CONTRATO,con una vigencia igual a la del mismo y seis (6) meses más.')
                 ]
-            }),
-        new Paragraph(
-            {
-                text: 'La presentación de las pólizas y de la constancia de pago de la(s) prima(s) de seguros, esrequisito para la realización del primer pago. En caso de efectuarse la prórroga o modificacióndel valor del CONTRATOEL CONTRATISTA se obliga a presentar el anexo de renovación delas pólizas y pago de las primas, dentro de los cinco (5)días siguientes a la prórroga o lasuscripción del correspondiente otrosí'
             })
     ];
+
+    if (contractualCivilLiability) {
+        guarantees.push(
+            bulletText('De responsabilidad civil extracontractual:que ampare los posibles perjuicioscausados a terceros, por el veinte por ciento (20%)del valor estimado del CONTRATO,con una vigencia igual a la del mismo y seis (6) meses más.'),
+        );
+    }
+
+    if (complianceWithTheContract) {
+        guarantees.push(
+            bulletText('Cumplimiento del CONTRATO: Por el treinta por ciento (30%) del valor del CONTRATO y con una vigencia igual a la de su duración y seis (6) meses más;')
+        );
+    }
+
+    if (salariesAndSocialBenefits) {
+        guarantees.push(
+            bulletText('De Salarios y prestaciones sociales:  Por el veinte por ciento (20%) del valor del CONTRATO con una vigencia igual a la de su duración y tres (3) años más;')
+        );
+    }
+
+    if (qualityOfTheGoodOrService) {
+        guarantees.push(
+            bulletText('De calidad del bien o servicio: Por el treinta por ciento (30%) del valor del CONTRATO y con una vigencia de un (1) año contado a partir de la entrega final de los bienes o lostrabajos a satisfacción de PORVENIR;')
+        );
+    }
+
+    if (goodHandlingOfTheAdvance) {
+        guarantees.push(
+            bulletText('Buen Manejo del Anticipo: Por el cien por ciento (100%) del valor del anticipo, con una vigencia igual a la de su duración y seis (6) meses más')
+        );
+    }
+
+    guarantees.push(
+        new Paragraph(
+            {
+                text: 'La presentación de las pólizas y de la constancia de pago de la(s) prima(s) de seguros, es requisito para la realización del primer pago. En caso de efectuarse la prórroga o modificacióndel valor del CONTRATOEL CONTRATISTA se obliga a presentar el anexo de renovación delas pólizas y pago de las primas, dentro de los cinco (5)días siguientes a la prórroga o lasuscripción del correspondiente otrosí'
+            })
+    );
+
+    return guarantees;
 };
 
 const penaltyFeeClause = () => {
     return new Paragraph(
         {
-  style: 'justified',
-  children: [
+                style: 'justified',
+                children: [
                 boldAllCapsText('DÉCIMA SEGUNDA.-  MULTAS: '),
                 simpleText('En caso de mora o incumplimiento parcial de cualesquiera delas obligaciones que  EL CONTRATISTA  contrae con  PORVENIR, ésta   podrá imponer alCONTRATISTA, multas sucesivas equivalente al uno por ciento (1%) del valor del CONTRATO,por cada día de retardo o incumplimiento, a menos que este se halle motivado por fuerza mayoro caso fortuito debidamente comprobado.  PORVENIR  podrá hacer efectivo el valor de lasmultas sobre cualquier suma que adeude al CONTRATISTA. Las multas con un tope máximodel diez (10%) del valor total del mismo, por lo cual si el valor de las multas excediere esteporcentaje PORVENIR dará aplicación a la cláusula penal. EL CONTRATISTA expresamenterenuncia a cualquier requerimiento judicial o extrajudicial para constituirse en mora.')
             ]});
@@ -664,8 +830,10 @@ const antiFraudAndAntiCorruptionClause = () => {
             ]});
 };
 
-const personalDataTreatmentClause = () => {
-    return [
+const personalDataTreatmentClause = (contract: Contract) => {
+    const requirePersonalDataTreatmentClause = contract?.clausesSection?.requirePersonalDataTreatmentClause;
+    return requirePersonalDataTreatmentClause
+        ? [
         new Paragraph(
             {
   style: 'justified',
@@ -702,16 +870,17 @@ const personalDataTreatmentClause = () => {
         bulletText('w) Salvaguardar   la   seguridad   de   las   bases   de   datos   en   los   que   se   contenga   datospersonales.'),
         bulletText('x) Guardar la confidencialidad respecto del Tratamiento. De los datos personales.'),
         bulletText('y) Dar cumplimiento a la Política de Tratamiento de Datos Personales de Porvenir y demásnormas       internas       respecto       a       Tratamiento       de       Datos(https://www.porvenir.com.co/documents/64086/0/PDF_manual_proteccion_datos.pdf/f504e045-a96e-1062-db39-981ab134fae8).')
-    ];
+    ] : [];
 };
 
-const cyberSecurityClause = () => {
-    return [
+const cyberSecurityClause = (contract?: Contract) => {
+    const requireCyberSecurityClause = contract?.clausesSection?.requireCyberSecurityClause;
+    return requireCyberSecurityClause ? [
         new Paragraph(
             {
   style: 'justified',
   children: [
-                    boldAllCapsText('DÉCIMA NOVENA.  CLÁUSULA DE CIBERSEGURIDAD:CIBERSEGURIDAD:'),
+                    boldAllCapsText('DÉCIMA NOVENA. CLÁUSULA DE CIBERSEGURIDAD:CIBERSEGURIDAD:'),
                     simpleText('Para efectosde dar cumplimiento a las políticas de  PORVENIR  y a las normas sobre Seguridad de laInformación y Ciberseguridad aplicables a la relación contractual, EL CONTRATISTA se obligaa:')
                 ]}),
         bulletText('1. Implementar  políticas  y  procedimientos   para   gestionar  los   riesgos   y  amenazas  deseguridad   de   la   información   y   Ciberseguridad   inherentes   al   servicio   objeto   de   sunegocio,   incluyendo   la   adopción   de   estándares   internacionalmente   aceptados   deconformidad con las líneas de negocio y servicios prestados por EL CONTRATISTA.'),
@@ -751,7 +920,7 @@ const cyberSecurityClause = () => {
         simpleParagraph('- Ciberseguridad: Es   el   conjunto   de   políticas,   conceptos,   recursos,   salvaguardas,directrices,   métodos   de   gestión   del   riesgo,   acciones,   investigación   y   desarrollo,formación,   prácticas,   seguros   y   tecnologías   orientadas   a   defender   y   anticipar   lasamenazas cibernéticas para proteger y asegurar los datos, sistemas y aplicaciones en elCiberespacio que son esenciales para la operación de PORVENIR.'),
         simpleParagraph('- Ciberespacio: Entorno resultante de la interacción de personas, software y servicios eninternet, a través de dispositivos tecnológicos conectados a una red, propiedad demúltiples dueños con diferentes requisitos operativos y regulatorios.'),
         simpleParagraph('- Incidente: Ocurrencia de una situación que afecta la protección o el aseguramiento delos datos, sistemas y aplicaciones que son esenciales para el negocio.')
-    ];
+    ] : [];
 };
 
 const indemnityClause = () => {
@@ -826,29 +995,29 @@ const coordinationClause = () => {
     );
 };
 
-const contractorInformationSection = () => {
+const contractorInformationSection = (contract: Contract) => {
     return [
         subTitle('POR PARTE DE EL CONTRATISTA:'),
-        simpleParagraph('Nombre:'),
-        simpleParagraph('Apellidos:'),
-        simpleParagraph('Teléfono:'),
-        simpleParagraph('Ext:'),
-        simpleParagraph('Celular:'),
-        simpleParagraph('Correo Electrónico:'),
-        simpleParagraph('Ciudad:')
+        simpleParagraph(`Nombre: ${contract?.coordinationAndFollowingSection?.supplierInfo?.name}`),
+        simpleParagraph(`Apellidos: ${contract?.coordinationAndFollowingSection?.supplierInfo?.lastname}`),
+        simpleParagraph(`Teléfono: ${contract?.coordinationAndFollowingSection?.supplierInfo?.telephone}`),
+        simpleParagraph(`Ext: ${contract?.coordinationAndFollowingSection?.supplierInfo?.telephoneExt}`),
+        simpleParagraph(`Celular: ${contract?.coordinationAndFollowingSection?.supplierInfo?.phoneNumber}`),
+        simpleParagraph(`Correo Electrónico : ${contract?.coordinationAndFollowingSection?.supplierInfo?.email}`),
+        simpleParagraph(`Bogotá: ${contract?.coordinationAndFollowingSection?.supplierInfo?.city}`)
     ];
 };
 
-const porvenirInformationSection = () => {
+const porvenirInformationSection = (contract: Contract) => {
     return [
         subTitle('POR PARTE DE Porvenir:'),
-        simpleParagraph('Nombre:'),
-        simpleParagraph('Apellidos:'),
-        simpleParagraph('Teléfono:'),
-        simpleParagraph('Ext:'),
-        simpleParagraph('Celular:'),
-        simpleParagraph('Correo Electrónico:'),
-        simpleParagraph('Ciudad:')
+        simpleParagraph(`Nombre: ${contract?.coordinationAndFollowingSection?.interCoordinatorInfo?.name}`),
+        simpleParagraph(`Apellidos: ${contract?.coordinationAndFollowingSection?.interCoordinatorInfo?.lastname}`),
+        simpleParagraph(`Teléfono: ${contract?.coordinationAndFollowingSection?.interCoordinatorInfo?.telephone}`),
+        simpleParagraph(`Ext: ${contract?.coordinationAndFollowingSection?.interCoordinatorInfo?.telephoneExt}`),
+        simpleParagraph(`Celular: ${contract?.coordinationAndFollowingSection?.interCoordinatorInfo?.phoneNumber}`),
+        simpleParagraph(`Correo Electrónico : ${contract?.coordinationAndFollowingSection?.interCoordinatorInfo?.email}`),
+        simpleParagraph(`Bogotá: ${contract?.coordinationAndFollowingSection?.interCoordinatorInfo?.city}`)
     ];
 };
 
@@ -924,7 +1093,7 @@ const domicileClause = () => {
     );
 };
 
-const annexesClause = () => {
+const annexesClause = (contract: Contract) => {
     return [
         new Paragraph(
             {
@@ -964,7 +1133,7 @@ const signaturesSection = () => {
         simpleParagraph('Por PORVENIR (20)'),
         subTitle('ALEJANDRO GÓMEZ VILLEGAS'),
         simpleParagraph('C.C. No. 79.941.020'),
-        simpleParagraph('Representante Legal'),,
+        simpleParagraph('Representante Legal'),
         simpleParagraph('Por EL CONTRATISTA (20)'),
         subTitle('xxxxxxxxxxxxxx'),
         simpleParagraph('C.C. No. xxxxxxxxx'),
