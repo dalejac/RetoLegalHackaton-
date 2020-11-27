@@ -24,6 +24,10 @@ a {
     src: url('/assets/fonts/bold.otf');
 }
 
+// body{
+//   color: orange;
+// }
+
 .form {
   &-section{
     &-row{
@@ -40,13 +44,17 @@ a {
           margin-top: 30px;
           margin-bottom: 30px;
           flex: 1;
+        } 
+        form-section{
+          color: orange;
+          font-family: regular;
         }
         label {
           font-family: 'bold';
           text-align: right;
           font-style: normal;
           font-weight: bold;
-          font-size: 26px;
+          font-size: 16px;
           line-height: 39px;
           color: #406B2B;
           width: 100%;
@@ -63,7 +71,7 @@ a {
           font-family: 'regular';
           font-style: normal;
           font-weight: normal;
-          font-size: 20px;
+          font-size: 16px;
           line-height: 39px;
           color: #406B2B;
           padding: 10px;

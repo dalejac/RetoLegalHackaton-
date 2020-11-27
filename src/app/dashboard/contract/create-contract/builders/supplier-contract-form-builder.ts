@@ -6,7 +6,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         wrappers: ['form-field'],
         className: 'form-section',
         templateOptions: {
-            label: 'Datos Generales',
+            label: 'Sección Datos Generales',
         },
         fieldGroup: [
             {
@@ -199,26 +199,6 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 hideExpression: 'model.personType !== "natural"'
             },
             {
-                key: 'legalRepresentative',
-                type: 'input',
-                className: 'form-section-row',
-                templateOptions: {
-                    label: 'Representante Legal',
-                    required: true,
-                },
-                hideExpression: 'model.personType !== "legal"'
-            },
-            {
-                key: 'roleDefinition',
-                type: 'input',
-                className: 'form-section-row',
-                templateOptions: {
-                    label: 'En su calidad de',
-                    required: true,
-                },
-                hideExpression: 'model.personType !== "legal"'
-            },
-            {
                 key: 'legalRepresentativeName',
                 type: 'input',
                 className: 'form-section-row',
@@ -233,11 +213,22 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 type: 'input',
                 className: 'form-section-row',
                 templateOptions: {
-                    label: 'N° de cédula de identificación (NIT)',
+                    label: 'N° de identificación (NIT)',
                     required: true,
                 },
                 hideExpression: 'model.personType !== "legal"'
             },
+            {
+                key: 'legalRepresentative',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Representante Legal',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "legal"'
+            },
+
         ]
     },
     {
@@ -245,7 +236,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         wrappers: ['form-field'],
         className: 'form-section',
         templateOptions: {
-            label: 'Precio del Contrato (por producto)',
+            label: 'Sección Precio del Contrato',
         },
         fieldGroup: [
             {
@@ -272,7 +263,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 type: 'input',
                 className: 'form-section-row',
                 templateOptions: {
-                    label: 'Precio del Contrato',
+                    label: 'Precio total del Contrato',
                     required: true,
                 },
                 hideExpression: 'model.ivaIsApplied !== true'
@@ -282,7 +273,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 type: 'input',
                 className: 'form-section-row',
                 templateOptions: {
-                    label: 'Precio del Contrato (en letras)',
+                    label: 'Precio total del Contrato (en letras)',
                     required: true,
                 },
                 hideExpression: 'model.ivaIsApplied !== true'
@@ -314,7 +305,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         wrappers: ['form-field'],
         className: 'form-section',
         templateOptions: {
-            label: 'Forma de Pago',
+            label: 'Sección Forma de Pago',
         },
         fieldGroup: [
             {
@@ -586,7 +577,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 type: 'input',
                 className: 'form-section-row',
                 templateOptions: {
-                    label: 'Suscripción del contrato',
+                    label: 'Fecha firma del contrato',
                     required: true,
                 }
             }
@@ -597,7 +588,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         wrappers: ['form-field'],
         className: 'form-section',
         templateOptions: {
-            label: 'Sección Adjuntos',
+            label: 'Sección Anexos',
         },
         fieldGroup: [
             {
@@ -622,6 +613,14 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 className: 'form-section-row',
                 templateOptions: {
                     label: 'Contentivo de la propuesta presentada por el  Contratista',
+                }
+            },
+            {
+                key: 'proposalByContractor',
+                type: 'file',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Acta del Comité o Junta Directiva',
                 }
             },
             {

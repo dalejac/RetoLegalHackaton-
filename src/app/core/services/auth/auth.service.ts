@@ -14,11 +14,11 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     let role: UserRole;
     // TODO: this implementation is just for develop purposes, please delete this for production
-    if (email === 'abastecimiento@porvenir.com') {
+    if (email === 'abastecimiento@porvenir.com.co') {
       role = UserRole.Supplier;
       this.authStorage.saveUserRole(role);
       return of(true);
-    } else if (email === 'usuaria@porvenir.com'){
+    } else if (email === 'usuaria@porvenir.com.co'){
       role = UserRole.User;
       this.authStorage.saveUserRole(role);
       return of(true);
