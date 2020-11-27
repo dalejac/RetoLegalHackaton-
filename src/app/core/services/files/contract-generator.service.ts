@@ -3,6 +3,7 @@ import {ContractGenerator} from './contract-generator';
 
 import { Packer } from 'docx';
 import { saveAs } from 'file-saver';
+import {Contract} from '../../../dashboard/model/contract.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,9 @@ export class ContractGeneratorService {
 
   constructor() { }
 
-  downloadContract(contractInfo: any): void {
+  downloadContract(contract: Contract): void {
     const contractGenerator = new ContractGenerator();
-    const doc = contractGenerator.create([
-      contractInfo
-    ]);
+    const doc = contractGenerator.create(contract);
 
     Packer.toBlob(doc).then(blob => {
       saveAs(blob, 'Contrato.docx');
