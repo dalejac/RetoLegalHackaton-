@@ -200,7 +200,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 hideExpression: 'model.personType !== "natural"'
             },
             {
-                key: 'legalRepresentativeName',
+                key: 'supplierName',
                 type: 'input',
                 className: 'form-section-row',
                 templateOptions: {
@@ -210,7 +210,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 hideExpression: 'model.personType !== "legal"'
             },
             {
-                key: 'legalRepresentativeId',
+                key: 'supplierId',
                 type: 'input',
                 className: 'form-section-row',
                 templateOptions: {
@@ -220,7 +220,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 hideExpression: 'model.personType !== "legal"'
             },
             {
-                key: 'legalRepresentative',
+                key: 'legalRepresentativeName',
                 type: 'input',
                 className: 'form-section-row',
                 templateOptions: {
@@ -229,7 +229,16 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 },
                 hideExpression: 'model.personType !== "legal"'
             },
-
+            {
+                key: 'legalRepresentativeId',
+                type: 'input',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Cédula del Representante Legal',
+                    required: true,
+                },
+                hideExpression: 'model.personType !== "legal"'
+            },
         ]
     },
     {
@@ -313,7 +322,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         },
         fieldGroup: [
             {
-                key: 'withRetainer',
+                key: 'isWithRetainer',
                 type: 'radio',
                 className: 'form-section-row',
                 templateOptions: {
@@ -339,7 +348,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Valor',
                     required: true,
                 },
-                hideExpression: 'model.withRetainer !== true'
+                hideExpression: 'model.isWithRetainer !== true'
             },
             {
                 key: 'retainerPriceInLetters',
@@ -349,7 +358,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Valor en letras',
                     required: true,
                 },
-                hideExpression: 'model.withRetainer !== true'
+                hideExpression: 'model.isWithRetainer !== true'
             },
             {
                 key: 'retainerPrc',
@@ -359,7 +368,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Porcentaje',
                     required: true,
                 },
-                hideExpression: 'model.withRetainer !== true'
+                hideExpression: 'model.isWithRetainer !== true'
             },
             {
                 key: 'retainerDate',
@@ -369,10 +378,10 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Fecha de Pago del anticipo',
                     required: true,
                 },
-                hideExpression: 'model.withRetainer !== true'
+                hideExpression: 'model.isWithRetainer !== true'
             },
             {
-                key: 'withMonthlyPaymentUponDelivery',
+                key: 'isWithMonthlyPaymentUponDelivery',
                 type: 'radio',
                 className: 'form-section-row',
                 templateOptions: {
@@ -391,7 +400,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 }
             },
             {
-                key: 'withOnlyPaymentUponDelivery',
+                key: 'isWithOnlyPaymentUponDelivery',
                 type: 'radio',
                 className: 'form-section-row',
                 templateOptions: {
@@ -417,7 +426,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Valor',
                     required: true,
                 },
-                hideExpression: 'model.withOnlyPaymentUponDelivery !== true'
+                hideExpression: 'model.isWithOnlyPaymentUponDelivery !== true'
             },
             {
                 key: 'uponDeliveryPriceInLetters',
@@ -427,7 +436,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Valor en letras',
                     required: true,
                 },
-                hideExpression: 'model.withOnlyPaymentUponDelivery !== true'
+                hideExpression: 'model.isWithOnlyPaymentUponDelivery !== true'
             },
             {
                 key: 'uponDeliveryPricePrc',
@@ -437,10 +446,10 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Porcentaje',
                     required: true,
                 },
-                hideExpression: 'model.withOnlyPaymentUponDelivery !== true'
+                hideExpression: 'model.isWithOnlyPaymentUponDelivery !== true'
             },
             {
-                key: 'anotherPaymentMethod',
+                key: 'isAnotherPaymentMethod',
                 type: 'radio',
                 className: 'form-section-row',
                 templateOptions: {
@@ -462,13 +471,13 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                 key: 'anotherPaymentMethodDescr',
                 type: 'textarea',
                 className: 'form-section-row',
-                defaultValue: 'xx % del valor del CONTRATO, correspondiente a la suma de xxxxxxxxxxx  M/cte ($ xxxxxx) IVA incluido, por concepto de _______. ',
+                defaultValue: 'xx % del valor del CONTRATO, correspondiente a la suma de _______  M/cte ($ xxxxxx) IVA incluido, por concepto de _______. ',
                 templateOptions: {
                     label: '',
                     required: true,
                     rows: 5,
                 },
-                hideExpression: 'model.anotherPaymentMethod !== true'
+                hideExpression: 'model.isAnotherPaymentMethod !== true'
             },
             {
                 key: 'isPriceInUsd',

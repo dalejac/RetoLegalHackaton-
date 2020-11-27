@@ -8,28 +8,32 @@ export interface Contract {
         personId: string;
         personMainAddress: string;
         chamberOfCommerce: string;
+        supplierName: string;
+        supplierId: string;
+        legalRepresentativeId: string;
+        legalRepresentativeName: string;
     };
     contractPriceSection:
     {
         ivaIsApplied: boolean;
-        contractPrice: string;
+        contractPrice: number;
         contractPriceInLetters: string;
-        unitPrice: string;
+        unitPrice: number;
         unitPriceInLetters: string;
     };
     payMethodSection: {
         anotherPaymentMethodDescr: string;
-        withRetainer: boolean;
-        retainerPrice: string;
+        isWithRetainer: boolean;
+        isWithMonthlyPaymentUponDelivery: boolean;
+        isWithOnlyPaymentUponDelivery: boolean;
+        isAnotherPaymentMethod: boolean;
+        retainerPrice: number;
         retainerPriceInLetters: string;
-        retainerPrc: string;
+        retainerPrc: number;
         retainerDate: string;
-        withMonthlyPaymentUponDelivery: boolean;
-        withOnlyPaymentUponDelivery: boolean;
-        uponDeliveryPrice: string;
+        uponDeliveryPrice: number;
         uponDeliveryPriceInLetters: string;
-        uponDeliveryPricePrc: string;
-        anotherPaymentMethod: boolean;
+        uponDeliveryPricePrc: number;
         isPriceInUsd: boolean;
     };
     durationSection: {
@@ -54,7 +58,8 @@ export interface Contract {
     contractObjectiveSection:
         {
             purposeOfTheContract: string;
-            tradingOf: string;
+            tradingOf?: string;
+            tradingAndDistributionOf?: string;
             unitNumbers: number;
             requireCommercialOffer: boolean;
             commercialOfferDate: string;
@@ -70,17 +75,17 @@ export interface Contract {
     obligationsSection: {
         isSupplierDirectManufacturer: boolean;
         supplierGuaranteeDelivery: boolean;
-        supplierAssumeWarehousing: boolean;
+        isSupplierAssumeWarehousing: boolean;
         arePeriodicReportsAgreed: boolean;
         periodicReportAgreement: string;
         returnMaxTimeAgreement: string;
         supplierHaveToPresentDisinfectionCertificate: boolean;
         isWorkScheduleAgreedWithSupplier: boolean;
         supplierNeedAccessToConfidentialInfo: boolean;
-        coordinationAndFollowingSection: {
-            supplierInfo: {
-                name: string;
-            },
+    };
+    coordinationAndFollowingSection: {
+        supplierInfo: {
+            name: string;
             lastname: string;
             telephone: string;
             telephoneExt: string;
@@ -88,18 +93,18 @@ export interface Contract {
             email: string;
             address: string;
             city: string;
-            interCoordinatorInfo: {
-                name: string;
-                lastname: string;
-                telephone: string;
-                telephoneExt: string;
-                phoneNumber: string;
-                email: string;
-                address: string;
-                city: string;
-            }
         },
-    };
+        interCoordinatorInfo: {
+            name: string;
+            lastname: string;
+            telephone: string;
+            telephoneExt: string;
+            phoneNumber: string;
+            email: string;
+            address: string;
+            city: string;
+        }
+    },
     adjunctSection: {
         requireContentOfDeliveryLocations: boolean;
     };

@@ -19,11 +19,11 @@ export const UserContractFormBuilder: FormlyFieldConfig[] = [
                     options: [
                         {
                             label: 'Compraventa',
-                            value: 'Compraventa',
+                            value: 'trading',
                         },
                         {
                             label: 'Compraventa y distribución',
-                            value: 'Compraventa y distribución'
+                            value: 'tradingAndDistribution'
                         },
                     ]
                 }
@@ -36,7 +36,7 @@ export const UserContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Compraventa de',
                     required: true,
                 },
-                hideExpression: 'model.purposeOfTheContract !== "Compraventa"'
+                hideExpression: 'model.purposeOfTheContract !== "trading"'
             },
             {
                 key: 'unitNumbers',
@@ -46,7 +46,7 @@ export const UserContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Número de unidades',
                     required: true,
                 },
-                hideExpression: 'model.purposeOfTheContract !== "Compraventa"'
+                hideExpression: 'model.purposeOfTheContract !== "trading"'
             },
             {
                 key: 'tradingAndDistributionOf',
@@ -56,7 +56,7 @@ export const UserContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Compraventa y distribución de',
                     required: true,
                 },
-                hideExpression: 'model.purposeOfTheContract !== "Compraventa y distribución"'
+                hideExpression: 'model.purposeOfTheContract !== "tradingAndDistribution"'
             },
             {
                 key: 'unitNumbers',
@@ -66,7 +66,7 @@ export const UserContractFormBuilder: FormlyFieldConfig[] = [
                     label: 'Unidades',
                     required: true,
                 },
-                hideExpression: 'model.purposeOfTheContract !==  "Compraventa y distribución"'
+                hideExpression: 'model.purposeOfTheContract !==  "tradingAndDistribution"'
             },
             {
                 key: 'requireCommercialOffer',
@@ -233,7 +233,7 @@ export const UserContractFormBuilder: FormlyFieldConfig[] = [
                 }
             },
             {
-                key: 'supplierAssumeWarehousing',
+                key: 'isSupplierAssumeWarehousing',
                 type: 'radio',
                 className: 'form-section-row',
                 templateOptions: {
