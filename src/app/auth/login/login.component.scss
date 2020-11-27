@@ -20,7 +20,7 @@ main{
 
 img{
     margin: 70px 10px 50px 50px;
-    width: 400px;
+    width: 300px;
 }
 
 label{
@@ -43,6 +43,10 @@ input {
     border: 2px solid #ffffff;
     border-radius: 15px;
     background-color: #9BB849;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'bold', sans-serif;
+    font-size: 16px;
 }
 
 ::placeholder {
@@ -53,7 +57,7 @@ input {
 
 button {
     font-family: 'bold', sans-serif;
-    font-weight: 38px;
+    font-size: 16px;
     margin-top: 50px;
     width: 250px;
     height: 50px;

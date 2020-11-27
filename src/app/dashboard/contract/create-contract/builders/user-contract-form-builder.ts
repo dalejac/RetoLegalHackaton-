@@ -580,7 +580,26 @@ export const UserContractFormBuilder: FormlyFieldConfig[] = [
                 type: 'radio',
                 className: 'form-section-row',
                 templateOptions: {
-                    label: 'Contentivo de los lugares de entrega',
+                    label: 'Documento que referencia los lugares de entrega',
+                    required: true,
+                    options: [
+                        {
+                            label: 'Si',
+                            value: true,
+                        },
+                        {
+                            label: 'No',
+                            value: false
+                        },
+                    ]
+                }
+            },
+            {
+                key: 'requireContentOfDeliveryLocations',
+                type: 'radio',
+                className: 'form-section-row',
+                templateOptions: {
+                    label: 'Acuerdo Niveles de Servicio',
                     required: true,
                     options: [
                         {

@@ -17,7 +17,7 @@
 
 .logo {
   width: 155px;
-  height: 125px;
+  height: auto;
   left: 85px;
 }
 
@@ -35,6 +35,7 @@
 .text-user {
   color: #ffffff;
   margin-right: 10px;
+  font-family: 'regular', sans-serif;
 }
 
 .profile-ico {
