@@ -6,6 +6,10 @@ import {ContractStatesComponent} from './contract-states/contract-states.compone
 
 const routes: Routes = [
   {
+    path: 'create/:id',
+    component: CreateContractComponent
+  },
+  {
     path: 'create',
     component: CreateContractComponent
   },

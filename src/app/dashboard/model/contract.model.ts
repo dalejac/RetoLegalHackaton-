@@ -1,4 +1,6 @@
 export interface Contract {
+    id?: string;
+    userCanEdit: boolean;
     supplierAssumeDelivery?: boolean;
     generalInfoSection: {
         interestedArea: string;
@@ -104,7 +106,7 @@ export interface Contract {
             address: string;
             city: string;
         }
-    },
+    };
     adjunctSection: {
         requireContentOfDeliveryLocations: boolean;
     };

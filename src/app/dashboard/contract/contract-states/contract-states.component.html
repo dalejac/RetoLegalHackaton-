@@ -6,15 +6,17 @@
               <th>Contrato</th>
               <th>Área Abastecimiento</th>
               <th>Área Usuaria</th>
+                <th *ngIf="currentUserRole === userRole.User">Editar</th>
               <th>Guardar</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="tr-detail">
-              <td class="tr-contract">ID:1234567</td>
+            <tr *ngFor="let contract of contracts$ | async" class="tr-detail">
+              <td class="tr-contract">ID: {{ contract.id }}</td>
               <td><img src="assets/images/icon_check.png"></td>
               <td><img src="assets/images/icon_no_check.png"></td>
-              <td><button (click)="download()"><img src="assets/images/icon_download.png"></button></td>
+                <td *ngIf="currentUserRole === userRole.User"> <button (click)="edit(contract?.id)">Editar </button></td>
+              <td><button (click)="download(contract)"><img src="assets/images/icon_download.png"></button></td>
             </tr>
           </tbody>
         </table>
