@@ -544,23 +544,23 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
                     options: [
                         {
                             label: 'Cumplimiento del Contrato',
-                            value: 'Cumplimiento del Contrato',
+                            value: 'complianceWithTheContract',
                         },
                         {
                             label: 'Buen manejo de anticipo',
-                            value: 'Buen manejo de anticipo',
+                            value: 'goodHandlingOfTheAdvance',
                         },
                         {
                             label: 'Salarios y prestaciones sociales',
-                            value: 'Salarios y prestaciones sociales',
+                            value: 'salariesAndSocialBenefits',
                         },
                         {
                             label: 'De calidad del bien o servicio',
-                            value: 'De calidad del bien o servicio',
+                            value: 'qualityOfTheGoodOrService',
                         },
                         {
                             label: 'Responsabilidad civil contractual',
-                            value: 'Responsabilidad civil contractual',
+                            value: 'contractualCivilLiability',
                         },
                     ],
                 },

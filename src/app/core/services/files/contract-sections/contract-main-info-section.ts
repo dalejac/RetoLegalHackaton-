@@ -1,4 +1,4 @@
-import {AlignmentType, Paragraph} from 'docx';
+import {Paragraph} from 'docx';
 import {Contract} from '../../../../dashboard/model/contract.model';
 
 export const contractMainInfoSection = (contract: Contract) => {

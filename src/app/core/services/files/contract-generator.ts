@@ -4,7 +4,7 @@ import {
 } from './contract-sections/contract-main-info-section';
 import {Contract} from '../../../dashboard/model/contract.model';
 import {contractClausesSection} from './contract-sections/contract-clauses-section';
-import {documentHeader, sectionTitle} from './file-helpers';
+import {documentHeader} from './file-helpers';
 
 export class ContractGenerator {
     public create(contract: Contract): Document {
