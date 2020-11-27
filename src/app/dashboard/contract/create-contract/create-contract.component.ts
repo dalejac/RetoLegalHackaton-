@@ -5,6 +5,9 @@ import {AuthService} from '../../../core/services/auth/auth.service';
 import {UserRole} from '../../../core/types/user-type.type';
 import {SupplierContractFormBuilder, SupplierMessage} from './builders/supplier-contract-form-builder';
 import {UserContractFormBuilder, UserMessage} from './builders/user-contract-form-builder';
+import { Observable } from 'rxjs';
+import { Contract } from '../../model/contract.model';
+import { FirestoreService } from '../../services/contract.service';
 
 @Component({
   selector: 'app-create-contract',
@@ -25,18 +28,21 @@ export class CreateContractComponent implements OnInit {
     },
   };
 
-  data = [];
+  data: Observable<Contract[]>;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private fireStore: FirestoreService) {}
 
   ngOnInit(): void {
+    this.data = this.fireStore.getData();
+    console.log('data');
   }
 
   save(): void {
     console.log(this.model);
   }
 
-  requireInfo(): void {
-    console.log('requireInfo');
+  add(item: Contract): void {
+    this.fireStore.add(item);
+    console.log('add');
   }
 }

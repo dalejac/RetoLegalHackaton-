@@ -27,4 +27,14 @@ export class FirestoreService {
         return { _id, ...data };
       })));
   }
-}
+    // tslint:disable-next-line: typedef
+    add(item: Contract) {
+      this.dataCollection.add(item);
+    }
+
+    // tslint:disable-next-line: typedef
+    update(item: Contract) {
+      this.firestore.doc(`${this.path}`).update(item);
+    }
+  }
+

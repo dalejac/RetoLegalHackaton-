@@ -6,7 +6,7 @@
         <formly-form [form]="form" [fields]="fields" [options]="options" [model]="model"></formly-form>
 
         <div class="create-contract-buttons">
-            <button *ngIf="currentUserRole === userRole.Supplier" class="create-contract-button__request" (click)="requireInfo()">Solicitar información complementaria al área interesada del proceso</button>
+            <button *ngIf="currentUserRole === userRole.Supplier" class="create-contract-button__request" (click)="add()">Solicitar información complementaria al área interesada del proceso</button>
             <button class="create-contract-button__save" (click)="save()">Guardar contrato</button>
         </div>
 
