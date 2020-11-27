@@ -34,15 +34,13 @@ export class CreateContractComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.fireStore.getData();
-    console.log('data');
   }
 
-  save(): void {
-    console.log(this.model);
+  update(): void {
+    // this.firestore.update();
   }
 
   add(item: Contract): void {
     this.fireStore.add(item);
-    console.log('add');
   }
 }

@@ -30,6 +30,7 @@ export class FirestoreService {
     // tslint:disable-next-line: typedef
     add(item: Contract) {
       this.dataCollection.add(item);
+      console.log('item');
     }
 
     // tslint:disable-next-line: typedef
