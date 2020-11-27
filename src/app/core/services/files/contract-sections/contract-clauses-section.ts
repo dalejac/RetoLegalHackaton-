@@ -51,9 +51,9 @@ export const contractClausesSection  = (contract: Contract) => {
         noWaiverClause(),
         domicileClause(),
         ...annexesClause(contract),
-        prevalenceClause(),
-        finalSection(),
-        ...signaturesSection()
+        prevalenceClause(contract),
+        finalSection(contract),
+        ...signaturesSection(contract)
     ];
 };
 
@@ -1106,37 +1106,51 @@ const annexesClause = (contract: Contract) => {
         ),
         bulletText('Certificados de existencia y representación legal de PORVENIR.'),
         bulletText('Certificados de existencia y representación legal del CONTRATISTA.'),
-        bulletText('Contentivo de la propuesta del xxxxxx xxxxxxxxxx, presentada por EL CONTRATISTA.'),
+        bulletText(`Contentivo de la propuesta del ${contract?.contractObjectiveSection?.commercialOfferDate}, presentada por EL CONTRATISTA.`),
         bulletText('Contentivo de los lugares de entrega.'),
         bulletText('Contentivo del Acuerdo de confidencialidad suscrito por el CONTRATISTA.')
     ];
 };
 
-const prevalenceClause = () => {
+const prevalenceClause = (contract: Contract) => {
     return new Paragraph(
         {
   style: 'justified',
   children: [
                 boldAllCapsText('TRIGÉSIMA   TERCERA. - PREVALENCIA'),
-                simpleText(' LAS PARTES declaran que ante cualquiercontradicción y/o ambigüedad entre lo establecido en la Propuesta de xxxxxxxxxxxx presentadapor EL CONTRATISTA, y el presente CONTRATO, prevalecerá lo estipulado en éste último.')
+                simpleText(`LAS PARTES declaran que ante cualquiercontradicción y/o ambigüedad entre lo establecido en la Propuesta de ${contract?.contractObjectiveSection?.commercialOfferDate} presentadapor EL CONTRATISTA, y el presente CONTRATO, prevalecerá lo estipulado en éste último.`)
             ]
         }
     );
 };
 
-const finalSection = () => {
-    return simpleParagraph('Como constancia de haber leído, entendido y aceptado las condiciones aquí previstas, se suscribe el presente CONTRATO en tres (3) ejemplares del mismo tenor y valor probatorio, enla ciudad de Bogotá,a los xxxxxxxxxxxxx.');
+const finalSection = (contract: Contract) => {
+    return simpleParagraph(`Como constancia de haber leído, entendido y aceptado las condiciones aquí previstas, se suscribe el presente CONTRATO en tres (3) ejemplares del mismo tenor y valor probatorio, enla ciudad de Bogotá,a los ${contract?.dateSection?.contractSubscription }.`);
 };
 
-const signaturesSection = () => {
+const signaturesSection = (contract: Contract) => {
+    const isLegalPerson = contract?.generalInfoSection?.personType === 'legal';
+
+    const legalRepresentative = (
+        isLegalPerson
+            ? contract?.generalInfoSection?.legalRepresentativeName
+            : contract?.generalInfoSection?.personFullName
+    ).toUpperCase();
+
+    const legalRepresentativeId = (
+        isLegalPerson
+            ? contract?.generalInfoSection?.legalRepresentativeId
+            : contract?.generalInfoSection?.personId
+    ).toUpperCase();
+
     return [
         simpleParagraph('Por PORVENIR (20)'),
         subTitle('ALEJANDRO GÓMEZ VILLEGAS'),
         simpleParagraph('C.C. No. 79.941.020'),
         simpleParagraph('Representante Legal'),
         simpleParagraph('Por EL CONTRATISTA (20)'),
-        subTitle('xxxxxxxxxxxxxx'),
-        simpleParagraph('C.C. No. xxxxxxxxx'),
+        subTitle(legalRepresentative),
+        simpleParagraph(`C.C. No. ${legalRepresentativeId}`),
         simpleParagraph('Representante Legal')
     ];
 };
