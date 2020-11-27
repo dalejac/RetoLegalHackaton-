@@ -1,4 +1,5 @@
 import {FormlyFieldConfig} from '@ngx-formly/core';
+import {FormlyBootstrapModule} from '@ngx-formly/bootstrap';
 
 export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
     {
@@ -237,6 +238,9 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         className: 'form-section',
         templateOptions: {
             label: 'Sección Precio del Contrato',
+            tooltip: {
+                content: "This is simple tooltip."
+            },
         },
         fieldGroup: [
             {
