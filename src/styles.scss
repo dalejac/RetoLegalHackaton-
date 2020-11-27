@@ -27,6 +27,10 @@ a {
 // body{
 //   color: orange;
 // }
+formly-wrapper-form-field{
+  color: #FF7C1A;
+  font-family: 'bold';
+}
 
 .form {
   &-section{
@@ -46,7 +50,7 @@ a {
           flex: 1;
         } 
         form-section{
-          color: orange;
+          color: #FF7C1A;
           font-family: regular;
         }
         label {

@@ -239,7 +239,7 @@ export const SupplierContractFormBuilder: FormlyFieldConfig[] = [
         templateOptions: {
             label: 'Sección Precio del Contrato',
             tooltip: {
-                content: "This is simple tooltip."
+                content: 'This is simple tooltip.'
             },
         },
         fieldGroup: [
