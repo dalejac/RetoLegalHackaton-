@@ -6,12 +6,10 @@
         <formly-form [form]="form" [fields]="fields" [options]="options" [model]="model"></formly-form>
 
         <div class="create-contract-buttons">
-            <button *ngIf="currentUserRole === userRole.Supplier" class="create-contract-button__request" (click)="update(model)">Solicitar información complementaria al área interesada del proceso</button>
+            <button *ngIf="currentUserRole === userRole.Supplier && showButtonUserCanEdit" class="create-contract-button__request" (click)="update()">Solicitar información complementaria al área interesada del proceso</button>
             <button class="create-contract-button__save" (click)="add(model)">Guardar contrato</button>
         </div>
 
     </form>
-
-    <!-- {{ model | json}} -->
 
 </div>

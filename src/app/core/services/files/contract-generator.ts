@@ -4,7 +4,7 @@ import {
 } from './contract-sections/contract-main-info-section';
 import {Contract} from '../../../dashboard/model/contract.model';
 import {contractClausesSection} from './contract-sections/contract-clauses-section';
-import {documentHeader, sectionTitle} from './file-helpers';
+import {documentHeader} from './file-helpers';
 
 export class ContractGenerator {
     public create(contract: Contract): Document {
@@ -41,11 +41,17 @@ export class ContractGenerator {
             }
         );
 
+        const contractInfo = CONTRACT_INFO(contract);
+
+        const supplierName = contractInfo.isLegalPerson
+            ? contract?.generalInfoSection?.supplierName
+            : contract?.generalInfoSection?.personFullName;
+
         document.addSection({
             headers: {
                 default: new Header({
                     children: [
-                        documentHeader(`CONTRATO DE COMPRAVENTA CELEBRADO ENTRE ----7- Y LA SOCIEDADADMINISTRADORA DE FONDOS DE PENSIONES Y CESANTÍAS PORVENIR S.A.`)
+                        documentHeader(`CONTRATO DE COMPRAVENTA CELEBRADO ENTRE ${supplierName} Y LA SOCIEDADADMINISTRADORA DE FONDOS DE PENSIONES Y CESANTÍAS PORVENIR S.A.`)
                     ],
                 }),
             },
@@ -58,4 +64,10 @@ export class ContractGenerator {
     }
 
 }
+
+export const CONTRACT_INFO = (contract: Contract) => {
+    return {
+        isLegalPerson: contract?.generalInfoSection?.personType === 'legal',
+    };
+};
 
