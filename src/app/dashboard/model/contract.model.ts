@@ -1,3 +1,3 @@
 export interface Contract {
-    supplierAssumeDelivery: boolean;
+    supplierAssumeDelivery?: boolean;
 }
