@@ -103,8 +103,8 @@ export const priceClause = (contract: Contract) => {
     const tradingOf = contract?.contractObjectiveSection?.tradingOf;
     const tradingAndDistributionOf = contract?.contractObjectiveSection?.tradingAndDistributionOf;
     const unitNumbers = contract?.contractObjectiveSection?.unitNumbers;
-    const unitPriceMessage = ` ${contract?.contractPriceSection?.unitPriceInLetters.toUpperCase()} M/ cte ($ ${contract?.contractPriceSection?.unitPrice})`;
-    const contractPriceMessage = ` ${contract?.contractPriceSection?.contractPriceInLetters.toUpperCase()} M/ cte ($ ${contract?.contractPriceSection?.contractPrice})`;
+    const unitPriceMessage = ` ${contract?.contractPriceSection?.unitPriceInLetters?.toUpperCase()} M/ cte ($ ${contract?.contractPriceSection?.unitPrice})`;
+    const contractPriceMessage = ` ${contract?.contractPriceSection?.contractPriceInLetters?.toUpperCase()} M/ cte ($ ${contract?.contractPriceSection?.contractPrice})`;
     const ivaIsApplied = contract?.contractPriceSection?.ivaIsApplied;
 
     const ivaParagraph = new Paragraph(
@@ -1135,13 +1135,13 @@ const signaturesSection = (contract: Contract) => {
         isLegalPerson
             ? contract?.generalInfoSection?.legalRepresentativeName
             : contract?.generalInfoSection?.personFullName
-    ).toUpperCase();
+    )?.toUpperCase();
 
     const legalRepresentativeId = (
         isLegalPerson
             ? contract?.generalInfoSection?.legalRepresentativeId
             : contract?.generalInfoSection?.personId
-    ).toUpperCase();
+    )?.toUpperCase();
 
     return [
         simpleParagraph('Por PORVENIR (20)'),
