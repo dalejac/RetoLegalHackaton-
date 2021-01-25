@@ -10,7 +10,7 @@
 * [6. Contribuyentes](#6-contribuyentes)
 * [7. Bibliografía](#7-bibliografía)
 
-*
+***
 
 ## 1. Objetivo del proyecto
 
