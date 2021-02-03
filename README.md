@@ -40,6 +40,10 @@ Se realizo iteración con los tres tipos de usuarios para revisar, flujo de la p
 
 ## 5. Contribuyentes
 
+#### Squad
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/squad.jpeg" width="1000"> </p>
+
+
 
 #### Demo Night
 
