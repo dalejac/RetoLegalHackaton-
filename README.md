@@ -10,7 +10,6 @@
 * [3. Investigación UX](#3-investigación-ux)
 * [4. Prototipos](#4-prototipos)
 * [5. Contribuyentes](#5-contribuyentes)
-* [6. Recursos](#6-recursos)
 
 ***
 
@@ -32,6 +31,23 @@ Desarrollar una plataforma que capture la data de las solicitudes de compras del
 
 * Iteración con usurios.
 Se realizo iteración con los tres tipos de usuarios para revisar, flujo de la plataforma y contenido de la data.
+
+
+## 4. Prototipos 
+
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Login.png" width="300" style="margin:10px"> <img style="margin:10px" src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Usuario.jpeg" width="300">
+<img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Abastecimiento.jpeg" width="300" style="margin:10px"> <img style="margin:10px" src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/EnCurso.png" width="300"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/EnCurso.png" width="300" style="margin:10px"> <img style="margin:10px" src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Radicados.png" width="300"> </p>
+
+## 5. Contribuyentes
+
+
+#### Demo Night
+
+El proyecto se expuso en la [Legal Hackaton](https://www.youtube.com/watch?v=VIsLqjkdVK8&ab_channel=Laboratoria) 2020 de Laboratoria.
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/DemoNight.jpeg" width="1000"> </p>
+
+
+
 
 
 
