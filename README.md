@@ -1,27 +1,58 @@
-# RetoPorvenir
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/header-acvital.png" width="1000"> </p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
-## Development server
+# ACVital Porvenir
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Índice
 
-## Code scaffolding
+* [1. Objetivo del proyecto](#1-objetivo-del-proyecto)
+* [2. Definición del producto](#2-definición-del-producto)
+* [3. Investigación UX](#3-investigación-ux)
+* [4. Prototipos](#4-prototipos)
+* [5. Contribuyentes](#5-contribuyentes)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+***
 
-## Build
+## 1. Objetivo del proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Creación y desarrollo de una solución a una problematica en el área legal de una de las empresas más importantes de Colombia, [Porvenir](https://www.porvenir.com.co/web/personas/inicio), en el marco de la [Legal Hackaton Edición LATAM Laboratora 2020](https://talento.laboratoria.la/legal-hackathon).
 
-## Running unit tests
+## 2. Definición del producto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Desarrollar una plataforma que capture la data de las solicitudes de compras del área usuaria (cualquier área de la compañía) al área de abastecimiento(compras), para crear un contrato que determine el compromiso de los proveedores con la empresa. Este contrato será enviado área legal para su aprovación. Esta plataforma debe permitir eficiencia, agilidad y conservar el ciclo del contrato en el tiempo como memoria institucional.
 
-## Running end-to-end tests
+## 3. Investigación UX
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+* Definición de usuarios y sus necesidades
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/users.jpg" width="1000"> </p>
 
-## Further help
+* Flujo de la plataforma y de los usuarios
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/userflow.jpg" width="1000"> </p>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* Iteración con usurios.
+Se realizo iteración con los tres tipos de usuarios para revisar, flujo de la plataforma y contenido de la data.
+
+
+## 4. Prototipos 
+
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Login.png" width="300" style="margin:10px"> <img style="margin:10px" src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Usuario.jpeg" width="300">
+<img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Abastecimiento.jpeg" width="300" style="margin:10px"> <img style="margin:10px" src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/EnCurso.png" width="300"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/EnCurso.png" width="300" style="margin:10px"> <img style="margin:10px" src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/Radicados.png" width="300"> </p>
+
+## 5. Contribuyentes
+
+#### Squad
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/squad.jpeg" width="1000"> </p>
+
+
+
+#### Demo Night
+
+El proyecto se expuso en la [Legal Hackaton](https://www.youtube.com/watch?v=VIsLqjkdVK8&ab_channel=Laboratoria) 2020 de Laboratoria.
+<p align="center"> <img src="https://github.com/paulalenisb/ACVital-Porvenir/blob/main/src/readme%20img/DemoNight.jpeg" width="1000"> </p>
+
+
+
+
+
+
+
